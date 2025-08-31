@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+@source "./";
+
+@theme {
+    --color-primary: #0DAFB4;
+    --color-primary-50: #E7F7F8;
+    --color-primary-hover: #0a8a8e;
+    /* For the active tab border */
+    --color-primary-600: #0C9FA4;
+    /* For the inactive tab text */
+    --color-text-muted: #58617A;
+
+    --color-avatar-fallback-bg: #D1F801;
+
+    --color-danger: #FDECEC;
+    --color-danger-text: #EF4444;
+    --color-danger-hover: #fbdada;
+
+    /* --- ADDITIONS FOR TEXT COMPONENT --- */
+    --color-text-header: #2E3A59;
+    --color-text-light: #737B90;
+
+    /* --- ADDITION FOR INPUT COMPONENT --- */
+    --color-neutral-gray-100: #E2E6EB;
+
+    /* --- ADDITIONS FOR TAG COMPONENT --- */
+    /* gray-100 */
+    --color-tag-default-bg: #F3F4F6;
+    /* gray-800 */
+    --color-tag-default-text: #1F2937;
+    /* green-100 */
+    --color-tag-success-bg: #D1FAE5;
+    /* green-800 */
+    --color-tag-success-text: #065F46;
+    /* yellow-100 */
+    --color-tag-warning-bg: #FEF9C3;
+    /* yellow-800 */
+    --color-tag-warning-text: #854D0E;
+
+    /* --- ADDITION FOR BADGE COMPONENT --- */
+    /* A bright orange for notifications */
+    --color-notification: #F97316;
+
+    /* For calendar grid lines */
+    --color-neutral-200: #DCE0E5;
+}

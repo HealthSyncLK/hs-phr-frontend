@@ -51,6 +51,9 @@ web_modules/
 .npm
 package-lock.json
 
+# .turbo cache directory
+.turbo
+
 # Optional eslint cache
 .eslintcache
 

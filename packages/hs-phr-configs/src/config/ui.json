@@ -1,0 +1,26 @@
+{
+    "signupForm": {
+        "title": "Create a New Account",
+        "description": "Join our platform to manage your health records securely.",
+        "fields": [
+            {
+                "name": "fullName",
+                "label": "Full Name",
+                "type": "text",
+                "placeholder": "John Doe"
+            },
+            {
+                "name": "email",
+                "label": "Email Address",
+                "type": "email",
+                "placeholder": "you@example.com"
+            },
+            {
+                "name": "password",
+                "label": "Password",
+                "type": "password",
+                "placeholder": "Enter your password"
+            }
+        ]
+    }
+}

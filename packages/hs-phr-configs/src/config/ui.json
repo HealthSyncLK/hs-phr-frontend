@@ -22,5 +22,19 @@
                 "placeholder": "Enter your password"
             }
         ]
+    },
+    "loginForm": {
+        "title": "Welcome back",
+        "description": "Please enter your details to sign in.",
+        "fields": {
+            "phone": {
+                "label": "Mobile Number",
+                "placeholder": "Enter mobile number"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "Enter your password"
+            }
+        }
     }
 }

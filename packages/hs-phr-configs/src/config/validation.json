@@ -1,0 +1,16 @@
+{
+    "password": {
+        "minLength": 8,
+        "minLengthMessage": "Password must be at least 8 characters.",
+        "uppercaseRegex": "(?=.*[A-Z])",
+        "uppercaseMessage": "Password must contain at least one uppercase letter.",
+        "numberRegex": "(?=.*\\d)",
+        "numberMessage": "Password must contain at least one number.",
+        "specialCharRegex": "(?=.*[!@#$%^&*])",
+        "specialCharMessage": "Password must contain at least one special character."
+    },
+    "phone": {
+        "minLength": 9,
+        "minLengthMessage": "Phone number must be at least 9 digits."
+    }
+}

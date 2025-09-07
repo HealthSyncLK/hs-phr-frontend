@@ -6,4 +6,6 @@ export const mockUser = {
     fullName: 'John Wink',
     email: 'john.wink@example.com',
     initials: 'JW',
+    phone: '+94 719247080',
+    password: 'admin1234'
 };

@@ -53,6 +53,6 @@ export const Default: Story = {
         </Card>
     ),
     args: {
-        defaultValue: 'personal-info',
+        value: 'personal-info',
     },
 };

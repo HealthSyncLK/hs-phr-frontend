@@ -1,11 +1,20 @@
-// This data is imported and served by the mock routes
-// In a real backend, this would come from a database
+// The User Type - This is the API contract for the backend
+export interface User {
+    id: string;
+    email: string;
+    phone: string;
+    name: string;
+    avatarUrl?: string;
+    roles: ('patient' | 'admin')[];
+    password?: string; // For mock login only
+}
 
-export const mockUser = {
-    id: 'user-123',
-    fullName: 'John Wink',
-    email: 'john.wink@example.com',
-    initials: 'JW',
-    phone: '+94 719247080',
-    password: 'admin1234'
+// Mock user data for development
+export const mockUser: User = {
+    id: 'user-001',
+    email: 'test@example.com',
+    phone: '719247080',
+    password: 'admin321', // Add a mock password
+    name: 'John Wink',
+    roles: ['patient'],
 };

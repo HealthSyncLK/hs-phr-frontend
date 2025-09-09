@@ -12,5 +12,8 @@
     "phone": {
         "minLength": 9,
         "minLengthMessage": "Phone number must be at least 9 digits."
+    },
+    "email": {
+        "invalidMessage": "Please enter a valid email address."
     }
 }

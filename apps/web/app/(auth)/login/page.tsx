@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -8,62 +8,77 @@ import { useRouter } from 'next/navigation';
 import { createLoginSchema } from '../../../lib/schemas';
 import { LoginScreen } from '../../../components/auth/LoginScreen';
 import { useConfig } from '../../../providers/ConfigProvider';
+import { useAuth } from '../../../providers/AuthProvider';
+import { authService } from '../../services/authService';
 
 export default function LoginPage() {
     const router = useRouter();
-    const { config, isLoading } = useConfig();
+    const { config, isLoading: isConfigLoading } = useConfig();
+    const [loginMethod, setLoginMethod] = useState<'mobile' | 'email'>('mobile');
+    const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
-    // Create the schema dynamically once the config is loaded
+    // NEW: This useEffect handles redirecting already-authenticated users.
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/dashboard');
+        }
+    }, [isAuthenticated, router]);
+
     const loginSchema = useMemo(() => {
         if (config?.validation) {
             return createLoginSchema(config.validation);
         }
-        // Return a base schema or undefined while loading
-        return z.object({});
+        return null;
     }, [config]);
 
-    type LoginFormValues = z.infer<typeof loginSchema>;
+    type LoginFormValues = z.infer<typeof loginSchema & object>;
 
     const methods = useForm<LoginFormValues>({
-        resolver: zodResolver(loginSchema),
+        resolver: loginSchema ? zodResolver(loginSchema) : undefined,
         mode: 'onChange',
+        defaultValues: {
+            loginMethod: 'mobile',
+            phone: '',
+            email: '',
+            password: '',
+        },
     });
 
-    const onSubmit = async (data: LoginFormValues) => {
+    useEffect(() => {
+        const currentPassword = methods.getValues('password') || '';
+        if (loginMethod === 'mobile') {
+            methods.reset({ loginMethod: 'mobile', phone: '', password: currentPassword });
+        } else {
+            methods.reset({ loginMethod: 'email', email: '', password: currentPassword });
+        }
+    }, [loginMethod, methods]);
+
+    const onSubmit = async (data: any) => {
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Invalid credentials');
-            }
-
-            // On successful login, redirect to the dashboard
+            await authService.login(data);
             router.push('/dashboard');
         } catch (error: any) {
-            console.error('Login failed:', error.message);
-            methods.setError('root.serverError', {
-                type: 'manual',
-                message: error.message,
-            });
+            methods.setError('root.serverError', { type: 'manual', message: error.message });
         }
     };
 
-    // Show a loading state until the configuration is fetched
-    if (isLoading || !config) {
-        return <div>Loading...</div>; // Or a proper loading skeleton
+    // Show a loading state while checking auth or fetching config.
+    if (isAuthLoading || isConfigLoading || !config || !loginSchema) {
+        return <div>Loading...</div>; // Or a proper loading skeleton component
     }
 
+    // If the user is definitely not authenticated, render the form.
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-                {/* ... (error display and LoginScreen remain the same) */}
-                <LoginScreen />
+                {methods.formState.errors.root?.serverError && (
+                    <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                        {methods.formState.errors.root.serverError.message}
+                    </div>
+                )}
+                <LoginScreen loginMethod={loginMethod} setLoginMethod={setLoginMethod} />
             </form>
         </FormProvider>
     );
 }
+

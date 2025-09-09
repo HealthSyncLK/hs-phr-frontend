@@ -1,24 +1,16 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-// Define the shape of your entire configuration
-interface AppConfig {
-    endpoints: {
-        apiBaseUrl: string;
-    };
-    ui: {
-        signupForm: any;
-        loginForm: any;
-    };
-    validation: any; // Add the validation property
-}
+import useSWR from 'swr';
+import { configService } from '../app/services/configService';
+import { AppConfig } from '../app/types/config';
+import apiClient from '../app/services/apiClient';
 
 interface ConfigContextType {
     config: AppConfig | null;
     isLoading: boolean;
+    error: any
 }
-
 const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
 
 export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
@@ -26,14 +18,11 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchConfig = async () => {
+        const fetchAndInitialize = async () => {
             try {
-                // We now use the environment variable. A fallback is included for safety.
-                const configApiUrl = `${process.env.NEXT_PUBLIC_CONFIG_API_BASE_URL}/config`;
-                const response = await fetch(configApiUrl);
-                if (!response.ok) throw new Error('Failed to fetch config');
-                const data = await response.json();
-                setConfig(data);
+                const configData = await configService.getConfig();
+                setConfig(configData);
+                apiClient.init(configData);
             } catch (error) {
                 console.error('Configuration Error:', error);
             } finally {
@@ -41,15 +30,16 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
             }
         };
 
-        fetchConfig();
+        fetchAndInitialize();
     }, []);
 
     return (
-        <ConfigContext.Provider value={{ config, isLoading }}>
+        <ConfigContext.Provider value={{ config, isLoading, error: null }}>
             {children}
         </ConfigContext.Provider>
     );
 };
+
 
 export const useConfig = () => {
     const context = useContext(ConfigContext);

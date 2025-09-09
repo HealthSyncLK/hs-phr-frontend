@@ -1,15 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
+import { Providers } from "../providers/Providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,8 +17,15 @@ export default function RootLayout({
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body>
+        {/*
+          By using our new 'Providers' component, we ensure all children
+          are correctly wrapped in the necessary client-side contexts.
+          This is much cleaner than nesting providers directly in this file.
+        */}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

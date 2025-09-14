@@ -18,7 +18,6 @@ export default function AuthLayout({
 
             {/* Right Panel: Form Content */}
             <div className="w-full lg:w-1/2 xl:w-1/3 flex items-center justify-center p-8">
-                {/* The ConfigProvider has been removed from here as it's now in the root layout */}
                 {children}
             </div>
         </main>

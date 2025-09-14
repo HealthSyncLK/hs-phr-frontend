@@ -79,6 +79,7 @@ export const TabsTrigger = React.forwardRef<
 
     return (
         <button
+            type='button'
             ref={ref}
             className={tabsTriggerVariants({ isActive, className })}
             onClick={() => setActiveTab(value)}

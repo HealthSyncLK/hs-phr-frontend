@@ -1,7 +1,7 @@
 {
     "defaultApiBaseUrl": "http://localhost:8080/api",
     "services": {
-        "auth": "http://localhost:8080/api/auth",
+        "auth": "http://localhost:3000/auth",
         "documents": "http://localhost:8080/api/documents"
     }
 }

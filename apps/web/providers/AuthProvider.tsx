@@ -10,21 +10,25 @@ interface AuthContextType {
     isLoading: boolean;
     error: any;
     isAuthenticated: boolean;
+    mutate: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    // SWR now uses our clean service function for fetching.
-    const { data: user, error, isLoading } = useSWR<User>(
-        '/api/auth/me', // The key for SWR
-        authService.getCurrentUser // The fetcher function
+    const { data: user, error, isLoading, mutate } = useSWR<User>(
+        'user-session', // A stable key for the session
+        authService.getCurrentUser,
+        {
+            revalidateOnFocus: false,
+            shouldRetryOnError: false,
+        }
     );
 
     const isAuthenticated = !isLoading && !error && !!user;
 
     return (
-        <AuthContext.Provider value={{ user: user || null, isLoading, error, isAuthenticated }}>
+        <AuthContext.Provider value={{ user: user || null, isLoading, error, isAuthenticated, mutate }}>
             {children}
         </AuthContext.Provider>
     );

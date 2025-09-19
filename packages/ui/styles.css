@@ -44,4 +44,12 @@
 
     /* For calendar grid lines */
     --color-neutral-200: #DCE0E5;
+
+    /* For decorative image background */
+    --color-dark-blue: #212539;
+}
+
+.custom-scroll-bar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) #f1f1f1;
 }

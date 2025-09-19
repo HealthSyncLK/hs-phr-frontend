@@ -15,5 +15,42 @@
     },
     "email": {
         "invalidMessage": "Please enter a valid email address."
+    },
+    "otp": {
+        "minLength": 6,
+        "invalidMessage": "Please enter a valid otp."
+    },
+    "firstName": {
+        "minLength": 2,
+        "maxLength": 50,
+        "minLengthMessage": "First name must be at least 2 character long.",
+        "maxLengthMessage": "First name must be no more than 50 characters.",
+        "requiredMessage": "First name is required."
+    },
+    "lastName": {
+        "minLength": 2,
+        "maxLength": 50,
+        "minLengthMessage": "Last name must be at least 2 character long.",
+        "maxLengthMessage": "Last name must be no more than 50 characters.",
+        "requiredMessage": "Last name is required."
+    },
+    "nic": {
+        "minLength": 1,
+        "minLengthMessage": "NIC is required.",
+        "patternRegex": "^\\d{9}[VvXx]$",
+        "patternMessage": "Please enter a valid NIC number."
+    },
+    "gender": {
+        "requiredMessage": "Please select a gender."
+    },
+    "confirmPassword": {
+        "requiredMessage": "Confirm password is required.",
+        "passwordMatch": "Passwords do not match."
+    },
+    "dob": {
+        "requiredMessage": "Date of birth is required.",
+        "invalidMessage": "Date of birth must be in the past.",
+        "invalidAgeMessage": "You must be at least 18 years old."
     }
+   
 }

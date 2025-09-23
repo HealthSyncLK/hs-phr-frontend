@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 // The main container for a page section that includes a table
 const TableContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => (
@@ -84,7 +84,7 @@ const TableRow = React.forwardRef<
             >
                 {isExpandable && (
                     <TableCell className="w-12">
-                        <Icon
+                        <CustomIcon
                             name="chevron-down"
                             className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                         />

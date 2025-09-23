@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { DateRange } from 'react-day-picker';
-// We import `Calendar` but rename it to `DatePicker` for clarity in the story
-import { DatePicker } from '../components/form/DatePicker';
+// We import `Calendar` but rename it to `CustomDatePicker` for clarity in the story
+import { CustomDatePicker } from '../components/form/CustomDatePicker';
 import { Card } from '../components/app/Card';
 
-const meta: Meta<typeof DatePicker> = {
-    title: 'Form Controls/DatePicker',
-    component: DatePicker,
+const meta: Meta<typeof CustomDatePicker> = {
+    title: 'Form Controls/CustomDatePicker',
+    component: CustomDatePicker,
     tags: ['autodocs'],
     parameters: {
         layout: 'centered',
@@ -15,7 +15,7 @@ const meta: Meta<typeof DatePicker> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof DatePicker>;
+type Story = StoryObj<typeof CustomDatePicker>;
 
 export const Default: Story = {
     name: 'As a Calendar Panel',
@@ -24,7 +24,7 @@ export const Default: Story = {
 
         return (
             <Card className="w-auto">
-                <DatePicker
+                <CustomDatePicker
                     mode="single"
                     selected={date}
                     onSelect={setDate}
@@ -41,7 +41,7 @@ export const RangeSelection: Story = {
 
         return (
             <Card className="w-auto">
-                <DatePicker
+                <CustomDatePicker
                     mode="range"
                     selected={range}
                     onSelect={setRange}

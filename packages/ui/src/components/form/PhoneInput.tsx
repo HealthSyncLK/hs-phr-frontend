@@ -7,7 +7,7 @@ import {
 } from '../navigation/DropdownMenu';
 import { twMerge } from 'tailwind-merge';
 import { Typography } from '../general/Typography';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 interface PhoneInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     countryCode: string;
@@ -37,7 +37,7 @@ export const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
                             aria-label="Select country code"
                         >
                             <Typography className="font-normal text-base text-gray-800">{countryCode}</Typography>
-                            <Icon name="chevron-down" className="w-5 h-5 text-gray-800" />
+                            <CustomIcon name="chevron-down" className="w-5 h-5 text-gray-800" />
                         </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>

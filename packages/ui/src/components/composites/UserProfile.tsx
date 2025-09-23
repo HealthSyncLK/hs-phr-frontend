@@ -7,7 +7,7 @@ import {
 } from '../navigation/DropdownMenu';
 import { Avatar } from '../general/Avatar';
 import { Typography } from '../general/Typography';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 export interface UserProfileProps {
     userName: string;
@@ -37,7 +37,7 @@ export const UserProfile = ({
                             {userName}
                         </Typography>
                     </div>
-                    <Icon name="chevron-down" className="w-5 h-5 text-text-light" />
+                    <CustomIcon name="chevron-down" className="w-5 h-5 text-text-light" />
                 </button>
             </DropdownMenuTrigger>
             {/* The children prop is used here to render the menu content */}

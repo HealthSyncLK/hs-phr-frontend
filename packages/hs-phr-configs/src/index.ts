@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import configRoutes from './routes/config';
 import authRoutes from './routes/auth';
+import recordsRoutes from './routes/records';
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(cookieParser());
 // Main Routes
 app.use('/api/config', configRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/records', recordsRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀 [hs-phr-configs]: Server running at http://localhost:${PORT}`);

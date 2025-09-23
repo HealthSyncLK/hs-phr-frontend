@@ -5,7 +5,7 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
 } from '../components/navigation/DropdownMenu';
-import { Icon } from '../components/general/Icon';
+import { CustomIcon } from '../components/general/CustomIcon';
 import { UserProfile } from '../components/composites/UserProfile';
 
 const meta: Meta<typeof UserProfile> = {
@@ -30,16 +30,16 @@ export const Default: Story = {
         >
             <DropdownMenuContent className="w-56">
                 <DropdownMenuItem>
-                    <Icon name="user" className="w-4 h-4 mr-2" />
+                    <CustomIcon name="user" className="w-4 h-4 mr-2" />
                     <span>My Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Icon name="settings" className="w-4 h-4 mr-2" />
+                    <CustomIcon name="settings" className="w-4 h-4 mr-2" />
                     <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-danger-text focus:text-white focus:bg-danger">
-                    <Icon name="log-out" className="w-4 h-4 mr-2" />
+                    <CustomIcon name="log-out" className="w-4 h-4 mr-2" />
                     <span>Log out</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>

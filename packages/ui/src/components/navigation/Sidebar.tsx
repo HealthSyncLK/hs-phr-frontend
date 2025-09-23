@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Icon, IconName } from '../general/Icon';
+import { CustomIcon, IconName } from '../general/CustomIcon';
 
 // --- Sidebar Container ---
 export const Sidebar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
@@ -47,17 +47,16 @@ export const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>
     ({ className, icon, children, isActive, ...props }, ref) => (
         // The `li` is the positioning parent for the indicator
         <li className="relative">
-            {isActive && <div className="left-[-12px] top-1/2 -translate-y-1/2 h-[56px] w-[7px] rounded-l-xl bg-primary" />}
             <a
                 ref={ref}
                 className={twMerge(
-                    'flex w-full items-center gap-2 rounded-xl py-3 text-sm font-medium transition-colors',
-                    isActive ? 'bg-primary-50 px-4' : 'hover:bg-neutral-50 px-4',
-                    className
+                    'relative flex w-full items-center gap-2 rounded-xl py-3 text-sm font-medium transition-colors',
+                    isActive ? 'bg-primary-50 pt-0 pb-0 pl-0 pr-2' : 'hover:bg-neutral-50 px-4'
                 )}
                 {...props}
             >
-                <Icon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
+                {isActive && <div className="left-1 h-[40px] w-[6px] rounded-l-xl bg-primary" />}
+                <CustomIcon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
                 <span className="flex-grow text-text-header font-normal text-[14px]">{children}</span>
             </a>
         </li>
@@ -88,9 +87,9 @@ export const SidebarCollapse = ({ icon, title, children, isActive }: SidebarColl
                 )}
             >
                 {isActive && <div className="left-1 h-[40px] w-[6px] rounded-l-xl bg-primary" />}
-                <Icon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
+                <CustomIcon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
                 <span className="font- flex-grow text-left text-text-header font-normal text-[14px]">{title}</span>
-                <Icon name="chevron-down" className={`h-4 w-4 text-text-header transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                <CustomIcon name="chevron-down" className={`h-4 w-4 text-text-header transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
             {/* STYLE CHANGE: Removed padding from the UL. Padding is now handled by each sub-item. */}
             {isOpen && (

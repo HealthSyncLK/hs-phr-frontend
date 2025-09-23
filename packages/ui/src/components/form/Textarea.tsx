@@ -2,7 +2,7 @@ import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const textareaVariants = cva(
-    'flex w-full rounded-lg border border-neutral-gray-100 bg-white px-4 py-3 text-base ring-offset-white placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[80px]',
+    'flex w-full min-h-[80px] rounded-lg border border-neutral-gray-100 bg-white px-4 py-3 text-base leading-6 font-light font-[Poppins] ring-offset-white placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
     {
         variants: {
             hasError: {
@@ -15,6 +15,7 @@ const textareaVariants = cva(
         },
     }
 );
+
 
 export interface TextareaProps
     extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,

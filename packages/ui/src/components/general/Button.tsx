@@ -1,6 +1,6 @@
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Icon, IconName } from './Icon';
+import { CustomIcon, IconName } from './CustomIcon';
 import { LoaderIcon } from '../../icons/LoaderIcon'; // We'll create this small icon component
 
 const buttonVariants = cva(
@@ -57,9 +57,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading && <LoaderIcon className="w-5 h-5 mr-2 animate-spin" />}
-        {!isLoading && leftIcon && <Icon name={leftIcon} className="w-5 h-5 mr-2" />}
+        {!isLoading && leftIcon && <CustomIcon name={leftIcon} className="w-5 h-5 mr-2" />}
         {children}
-        {!isLoading && rightIcon && <Icon name={rightIcon} className="w-5 h-5 ml-2" />}
+        {!isLoading && rightIcon && <CustomIcon name={rightIcon} className="w-5 h-5 ml-2" />}
       </button>
     );
   }

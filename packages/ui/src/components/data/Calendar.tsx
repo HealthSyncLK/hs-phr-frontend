@@ -13,7 +13,7 @@ import {
     isToday as isTodayDateFns,
 } from 'date-fns';
 import { Button } from '../general/Button';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 import { Typography } from '../general/Typography';
 import { SegmentedControl, SegmentedControlItem } from '../navigation/SegmentedControl';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../general/Tooltip';
@@ -56,7 +56,7 @@ const AppointmentCalendarHeader = ({
                 onClick={onPrevious}
                 aria-label="Go to previous month"
             >
-                <Icon name="chevron-left" className="w-4 h-4" />
+                <CustomIcon name="chevron-left" className="w-4 h-4" />
             </Button>
 
             {/* Style Update: Font size, weight, and line height matched */}
@@ -71,7 +71,7 @@ const AppointmentCalendarHeader = ({
                 onClick={onNext}
                 aria-label="Go to next month"
             >
-                <Icon name="chevron-right" className="w-4 h-4 text-text-header" />
+                <CustomIcon name="chevron-right" className="w-4 h-4 text-text-header" />
             </Button>
         </div>
         <SegmentedControl value="calendar" onValueChange={() => { }}>
@@ -128,9 +128,9 @@ const CalendarEvent = ({ title, subtitle, time, details, isActive }: { title: st
             <TooltipContent>
                 {/* This is the content shown inside the tooltip */}
                 <div className="flex flex-col gap-1.5 p-1">
-                    <div className="flex items-center gap-2"><Icon name="user" className="w-4 h-4" />{details.doctor}</div>
-                    <div className="flex items-center gap-2"><Icon name="clock" className="w-4 h-4" />{details.time}</div>
-                    <div className="flex items-center gap-2"><Icon name="location" className="w-4 h-4" />{details.location}</div>
+                    <div className="flex items-center gap-2"><CustomIcon name="user" className="w-4 h-4" />{details.doctor}</div>
+                    <div className="flex items-center gap-2"><CustomIcon name="clock" className="w-4 h-4" />{details.time}</div>
+                    <div className="flex items-center gap-2"><CustomIcon name="location" className="w-4 h-4" />{details.location}</div>
                 </div>
             </TooltipContent>
         </Tooltip>

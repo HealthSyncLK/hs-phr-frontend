@@ -19,7 +19,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
                     className="relative flex items-center justify-center w-[21px] h-[21px] bg-white border-2 rounded-[4px] border-neutral-gray-100 
                      transition-colors peer-checked:bg-primary peer-checked:border-primary"
                 >
-                    {/* Checkmark Icon - Now uses hidden/block for visibility */}
+                    {/* Checkmark CustomIcon - Now uses hidden/block for visibility */}
                     <CheckIcon className="w-3 h-3 text-white peer-checked:block" />
                 </div>
 

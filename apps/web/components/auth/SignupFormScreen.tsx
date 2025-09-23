@@ -1,5 +1,5 @@
 'use client';
-import { Input } from '@repo/ui/components/form/Input';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
 import {
   Select,
   SelectContent,
@@ -46,17 +46,17 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
             control={control}
             render={({ field }) => (
               <FormControl label={formConfig.fields.firstName.label}>
-                <Input
+                <CustomInput
                   type=""
                   placeholder={formConfig.fields.firstName.placeholder}
                   hasError={!!errors.firstName}
                   {...field}
                 />
-                  {errors.firstName && (
-                    <p className="text-red-500 text-sm mt-1 leading-tight">
-                      {errors.firstName?.message as string}
-                    </p>
-                  )}
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1 leading-tight">
+                    {errors.firstName?.message as string}
+                  </p>
+                )}
               </FormControl>
             )}
           />
@@ -67,7 +67,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
             control={control}
             render={({ field }) => (
               <FormControl label={formConfig.fields.lastName.label}>
-                <Input
+                <CustomInput
                   type=""
                   placeholder={formConfig.fields.lastName.placeholder}
                   hasError={!!errors.lastName}
@@ -144,7 +144,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
           control={control}
           render={({ field }) => (
             <FormControl label={formConfig.fields.nic.label}>
-              <Input
+              <CustomInput
                 type="text"
                 placeholder={formConfig.fields.nic.placeholder}
                 hasError={!!errors.nic}
@@ -166,7 +166,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
           control={control}
           render={({ field }) => (
             <FormControl label={formConfig.fields.email.label}>
-              <Input
+              <CustomInput
                 type=""
                 placeholder={formConfig.fields.email.placeholder}
                 hasError={!!errors.email}
@@ -190,7 +190,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
             <FormControl label={formConfig.fields.phone.label}>
               <PhoneInput
                 countryCode="+94"
-                onCountryCodeChange={() => {}}
+                onCountryCodeChange={() => { }}
                 placeholder={formConfig.fields.phone.placeholder}
                 error={!!errors.phone}
                 {...field}
@@ -211,7 +211,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
           control={control}
           render={({ field }) => (
             <FormControl label={formConfig.fields.password.label}>
-              <Input
+              <CustomInput
                 type="password"
                 placeholder={formConfig.fields.password.placeholder}
                 hasError={!!errors.password}
@@ -233,7 +233,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
           control={control}
           render={({ field }) => (
             <FormControl label={formConfig.fields.confirmPassword.label}>
-              <Input
+              <CustomInput
                 type="password"
                 placeholder={formConfig.fields.confirmPassword.placeholder}
                 hasError={!!errors.confirmPassword}

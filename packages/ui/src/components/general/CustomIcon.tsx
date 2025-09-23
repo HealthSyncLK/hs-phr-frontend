@@ -36,6 +36,8 @@ import { ShoppingCartIcon } from '../../icons/ShoppingCartIcon';
 import { DownloadIcon } from '../../icons/DownloadIcon';
 import { CalendarIcon } from '../../icons/CalendarIcon';
 import { ExpandArrowIcon } from '../../icons/ExpandArrowIcon';
+import { QrCodeIcon } from '../../icons/QrCodeIcon';
+import { LinkIcon } from '../../icons/LinkIcon';
 
 
 // Create a map of icon names to their components
@@ -73,6 +75,8 @@ export const iconMap = {
     'message-circle': MessageCircleIcon,
     'shopping-cart': ShoppingCartIcon,
     download: DownloadIcon,
+    'qr-code': QrCodeIcon,
+    link: LinkIcon,
     calendar: CalendarIcon,
     expand: ExpandArrowIcon
     // Add other icons to this map
@@ -85,7 +89,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
     name: IconName;
 }
 
-export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
+export const CustomIcon = React.forwardRef<SVGSVGElement, IconProps>(
     ({ name, className, ...props }, ref) => {
         const IconComponent = iconMap[name];
 
@@ -109,4 +113,4 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 );
 
-Icon.displayName = 'Icon';
+CustomIcon.displayName = 'CustomIcon';

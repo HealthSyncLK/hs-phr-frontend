@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface LogoProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     src: string;
- }
+}
 
 export const Logo = React.forwardRef<HTMLAnchorElement, LogoProps>(
     ({ className, src, href = '/', ...props }, ref) => {

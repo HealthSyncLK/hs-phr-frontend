@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '../components/form/Input';
+import { CustomInput } from '../components/form/CustomInput';
 import { FormControl } from '../components/form/FormControl';
-import { iconMap } from '../components/general/Icon';
+import { iconMap } from '../components/general/CustomIcon';
 
-const meta: Meta<typeof Input> = {
-  title: 'Form Controls/Input',
-  component: Input,
+const meta: Meta<typeof CustomInput> = {
+  title: 'Form Controls/CustomInput',
+  component: CustomInput,
   tags: ['autodocs'],
   argTypes: {
     placeholder: { control: 'text' },
@@ -31,7 +31,7 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof CustomInput>;
 
 export const Default: Story = {
   args: {
@@ -42,7 +42,7 @@ export const Default: Story = {
 export const WithLabel: Story = {
   render: (args) => (
     <FormControl label="Email Address">
-      <Input {...args} />
+      <CustomInput {...args} />
     </FormControl>
   ),
   args: {
@@ -53,7 +53,7 @@ export const WithLabel: Story = {
 export const WithError: Story = {
   render: (args) => (
     <FormControl label="Email Address" error="Please enter a valid email.">
-      <Input {...args} />
+      <CustomInput {...args} />
     </FormControl>
   ),
   args: {
@@ -66,7 +66,7 @@ export const WithError: Story = {
 export const Disabled: Story = {
   render: (args) => (
     <FormControl label="Email Address">
-      <Input {...args} />
+      <CustomInput {...args} />
     </FormControl>
   ),
   args: {
@@ -78,7 +78,7 @@ export const Disabled: Story = {
 export const WithLeftIcon: Story = {
   render: (args) => (
     <FormControl label="Search">
-      <Input {...args} />
+      <CustomInput {...args} />
     </FormControl>
   ),
   args: {
@@ -90,7 +90,7 @@ export const WithLeftIcon: Story = {
 export const Password: Story = {
   render: (args) => (
     <FormControl label="Password">
-      <Input {...args} />
+      <CustomInput {...args} />
     </FormControl>
   ),
   args: {

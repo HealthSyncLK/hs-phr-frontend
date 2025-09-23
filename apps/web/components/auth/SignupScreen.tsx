@@ -6,7 +6,7 @@ import { Tabs, TabsList, TabsTrigger } from '@repo/ui/components/navigation/Tabs
 import { Typography } from '@repo/ui/components/general/Typography';
 import { FormControl } from '@repo/ui/components/form/FormControl';
 import { PhoneInput } from '@repo/ui/components/form/PhoneInput';
-import { Input } from '@repo/ui/components/form/Input';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
 import { Button } from '@repo/ui/components/general/Button';
 import Link from 'next/link';
 
@@ -64,7 +64,7 @@ export const SignupScreen = ({
               <FormControl label={formConfig.fields.phone.label}>
                 <PhoneInput
                   countryCode="+94"
-                  onCountryCodeChange={() => {}}
+                  onCountryCodeChange={() => { }}
                   placeholder={formConfig.fields.phone.placeholder}
                   error={!!errors.phone}
                   {...field}
@@ -83,7 +83,7 @@ export const SignupScreen = ({
             control={control}
             render={({ field }) => (
               <FormControl label={formConfig.fields.email.label}>
-                <Input
+                <CustomInput
                   type="email"
                   placeholder={formConfig.fields.email.placeholder}
                   hasError={!!errors.email}

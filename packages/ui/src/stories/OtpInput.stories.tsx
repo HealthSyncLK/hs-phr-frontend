@@ -21,7 +21,7 @@ export default meta;
 type Story = StoryObj<typeof OtpInput>;
 
 export const Default: Story = {
-    name: 'Interactive OTP Input',
+    name: 'Interactive OTP CustomInput',
     render: (args) => {
         const [otp, setOtp] = useState('');
         return (

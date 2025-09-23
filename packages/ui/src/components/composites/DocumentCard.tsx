@@ -1,7 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Card } from '../app/Card';
-import { Icon, IconName } from '../general/Icon';
+import { CustomIcon, IconName } from '../general/CustomIcon';
 import { Typography } from '../general/Typography';
 import {
     DropdownMenu,
@@ -33,14 +33,14 @@ export const DocumentCard = ({
             className={twMerge('p-4 w-full', className)}
         >
             <div className="flex items-center gap-4">
-                {/* Icon Section */}
+                {/* CustomIcon Section */}
                 <div
                     className={twMerge(
                         'flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg',
                         iconBgClass
                     )}
                 >
-                    <Icon name={icon} className="h-6 w-6 text-primary" />
+                    <CustomIcon name={icon} className="h-6 w-6 text-primary" />
                 </div>
 
                 {/* Text Section */}
@@ -58,7 +58,7 @@ export const DocumentCard = ({
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="tertiary" size="sm" className='text-text-header'>
-                                <Icon name="more-vertical" className="w-5 h-5" />
+                                <CustomIcon name="more-vertical" className="w-5 h-5" />
                             </Button>
                         </DropdownMenuTrigger>
                         {menuContent}

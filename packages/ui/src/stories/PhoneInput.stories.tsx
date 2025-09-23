@@ -37,7 +37,7 @@ export default meta;
 type Story = StoryObj<typeof PhoneInput>;
 
 export const Default: Story = {
-    name: 'Interactive Phone Input',
+    name: 'Interactive Phone CustomInput',
     render: () => {
         const [phone, setPhone] = useState('');
         const [countryCode, setCountryCode] = useState('+94');

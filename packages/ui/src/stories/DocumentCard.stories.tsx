@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { DocumentCard } from '../components/composites/DocumentCard';
 import { DropdownMenuContent, DropdownMenuItem } from '../components/navigation/DropdownMenu';
-import { Icon } from '../components/general/Icon';
+import { CustomIcon } from '../components/general/CustomIcon';
 import { Typography } from '../components/general/Typography';
 import { Card } from '../components/app/Card';
 
@@ -19,15 +19,15 @@ type Story = StoryObj<typeof DocumentCard>;
 const exampleMenuContent = (
     <DropdownMenuContent className="w-40">
         <DropdownMenuItem>
-            <Icon name="eye" className="w-4 h-4 mr-2" />
+            <CustomIcon name="eye" className="w-4 h-4 mr-2" />
             <span>View</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-            <Icon name="download" className="w-4 h-4 mr-2" />
+            <CustomIcon name="download" className="w-4 h-4 mr-2" />
             <span>Download</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="text-danger-text focus:bg-danger focus:text-white">
-            <Icon name="trash" className="w-4 h-4 mr-2" />
+            <CustomIcon name="trash" className="w-4 h-4 mr-2" />
             <span>Delete</span>
         </DropdownMenuItem>
     </DropdownMenuContent>

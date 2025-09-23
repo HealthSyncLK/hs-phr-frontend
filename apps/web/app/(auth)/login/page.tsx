@@ -149,7 +149,7 @@ export default function LoginPage() {
                                 {otpMethods.formState.errors.root.serverError.message as string}
                             </div>
                         )}
-                        <OtpScreen contact={loginDetails.contact} />
+                        <OtpScreen contact={loginDetails.contact} onResend={detailsMethods.handleSubmit(onDetailsSubmit)}/>
                     </form>
                 </FormProvider>
             )}

@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Logo>;
 export const Default: Story = {
     render: () => (
         <div className="p-4 bg-neutral-100 rounded-md">
-            <Logo />
+            <Logo src="/src/stories/assets/logo.png"/>
         </div>
     ),
 };

@@ -54,7 +54,7 @@ const post = async <T>(endpointKey: string, body: any): Promise<T> => {
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'An API error occurred.');
+        throw new Error(errorData.error || 'An API error occurred.');
     }
     return response.json();
 };
@@ -81,8 +81,9 @@ const get = async <T>(endpointKey: string): Promise<T> => {
 
 const apiClient = {
     init,
+    getUrl,
     get,
-    post,
+    post
 };
 
 export default apiClient;

@@ -32,6 +32,7 @@
     "@radix-ui/react-popover": "^1.1.15",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@react-input/mask": "^2.0.4",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/react-signature-canvas": "^1.0.7",
     "class-variance-authority": "^0.7.1",

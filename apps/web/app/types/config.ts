@@ -6,8 +6,12 @@ export interface AppConfig {
         services: any;
     };
     ui: {
-        signupForm: any;
         loginForm: any;
+        initialSignupForm: any;
+        otpForm: any;
+        signupForm: any;
+        identificationForm: any;
+        consentForm: any;
     };
     validation: any;
 }

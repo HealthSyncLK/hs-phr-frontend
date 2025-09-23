@@ -1,102 +1,236 @@
 {
-    "signupForm": {
-        "title": "Create a New Account",
-        "description": "Join our platform to manage your health records securely.",
-        "fields": [
-            {
-                "name": "fullName",
-                "label": "Full Name",
-                "type": "text",
-                "placeholder": "John Doe"
-            },
-            {
-                "name": "email",
-                "label": "Email Address",
-                "type": "email",
-                "placeholder": "you@example.com"
-            },
-            {
-                "name": "password",
-                "label": "Password",
-                "type": "password",
-                "placeholder": "Enter your password"
-            }
-        ]
-    },
-    "loginForm": {
-        "title": "Welcome back",
-        "description": "Please enter your details to sign in.",
-        "fields": {
-            "phone": {
-                "label": "Mobile Number",
-                "placeholder": "Enter mobile number"
-            },
-            "password": {
-                "label": "Password",
-                "placeholder": "Enter your password"
-            }
-        }
-    },
-    "recordDetailForm": {
-        "title": "Health Record",
-        "fields": {
-            "documentName": {
-                "label": "Document Name",
-                "placeholder": "ABC",
-                "type": "text"
-            },
-            "documentStatus": {
-                "label": "Document Status",
-                "placeholder": "Status",
-                "type": "select"
-            },
-            "visibility": {
-                "label": "Visibility",
-                "placeholder": "Visibility",
-                "type": "select"
-            },
-            "documentType": {
-                "label": "Document Type*",
-                "placeholder": "Blood Report",
-                "type": "text"
-            },
-            "documentDate": {
-                "label": "Document Date",
-                "placeholder": "YYYY/MM/DD"
-            },
-            "doctorName": {
-                "label": "Doctor Name",
-                "placeholder": "Dr. Asitha",
-                "type": "text"
-            },
-            "documentExpireDate": {
-                "label": "Document Expire Date",
-                "placeholder": "YYYY/MM/DD"
-            },
-            "hospital": {
-                "label": "Hospital/Clinic",
-                "placeholder": "Clinic",
-                "type": "text"
-            },
-            "notes": {
-                "label": "Notes/Comments",
-                "placeholder": "Blood Report",
-                "type": "textarea"
-            },
-            "reminderDate": {
-                "label": "Reminder Date",
-                "placeholder": "YYYY/MM/DD"
-            },
-            "reminderTime": {
-                "label": "Time",
-                "placeholder": "HH:MM",
-                "type": "time"
-            },
-            "reference": {
-                "label": "Reference",
-                "placeholder": "Reference",
-                "type": "text"
-            }
-        }
+  "signupForm": {
+    "title": "Create a New Account",
+    "description": "Join our platform to manage your health records securely.",
+    "fields": [
+      {
+        "name": "fullName",
+        "label": "Full Name",
+        "type": "text",
+        "placeholder": "John Doe"
+      },
+      {
+        "name": "email",
+        "label": "Email Address",
+        "type": "email",
+        "placeholder": "you@example.com"
+      },
+      {
+        "name": "password",
+        "label": "Password",
+        "type": "password",
+        "placeholder": "Enter your password"
+      }
+    ]
+  },
+  "loginForm": {
+    "title": "Welcome back",
+    "description": "Please enter your details to sign in.",
+    "fields": {
+      "phone": {
+        "label": "Mobile Number",
+        "placeholder": "Enter mobile number"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      }
     }
+  },
+  "initialSignupForm": {
+    "title": "Welcome to HealthSync",
+    "description": "Log in using your mobile phone number or email",
+    "fields": {
+      "phone": {
+        "label": "Mobile No",
+        "placeholder": "Enter Mobile Number"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Email"
+      }
+    },
+    "labels": {
+      "forgotPassword": "Forgot Password?",
+      "accountExist": "Already have an account?",
+      "login": "Log in"
+    },
+    "buttons": {
+      "signup": "Sign up",
+      "processing": "Signing up..."
+    }
+  },
+  "otpForm": {
+    "title": "OTP Verification",
+    "description": "Please enter the 6 digit code sent to your",
+    "labels": {
+      "codeReceive": "Didn't receive a code?",
+      "resend": "Resend Code"
+    },
+    "buttons": {
+      "continue": "Verify & Continue"
+    }
+  },
+  "signupForm": {
+    "title": "Welcome to HealthSync",
+    "fields": {
+      "firstName": {
+        "name": "firstName",
+        "label": "First Name*",
+        "placeholder": "First Name"
+      },
+      "lastName": {
+        "name": "lastName",
+        "label": "Last Name*",
+        "placeholder": "Last Name"
+      },
+      "dob": {
+        "name": "dob",
+        "label": "Date Of Birth*",
+        "placeholder": "Date Of Birth"
+      },
+      "gender": {
+        "name": "gender",
+        "label": "Gender*"
+      },
+      "nic": {
+        "name": "NIC",
+        "label": "NIC No/Passport No*",
+        "placeholder": "Enter \"NIC\" No or Passport No"
+      },
+      "email": {
+        "name": "email",
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "phone": {
+        "name": "phone",
+        "label": "Phone Number*",
+        "placeholder": "phone"
+      },
+      "password": {
+        "name": "password",
+        "label": "Password*",
+        "type": "password"
+      },
+      "confirmPassword": {
+        "name": "confirmPassword",
+        "label": "Confirm Password*",
+        "type": "password"
+      }
+    },
+    "buttons": {
+      "next": "Next"
+    },
+    "labels": {
+      "accountExist": "Already have an account?",
+      "login": "Log in"
+    }
+  },
+  "identificationForm": {
+    "title": "Identification",
+    "description": "Take a clear photo of your NIC or Passport",
+    "fields": {
+      "nic": {
+        "label": "NIC No/Passport No*",
+        "placeholder": "Enter \"NIC\" No or Passport No"
+      },
+      "front": {
+        "label": "Front Side"
+      },
+      "back": {
+        "label": "Back Side"
+      }
+    },
+    "labels": {
+      "remindMe": "Remind me later"
+    },
+    "buttons": {
+      "next": "Next"
+    }
+  },
+  "consentForm": {
+    "title": "Consent to Service",
+    "description": "We care about your privacy. Please confirm you're okay with securely storing your helath informtion.",
+    "consent": {
+      "title": "Consent to Utilize HealthSync's Medical Records Storage Service",
+      "descTitle": "This consent allows HealthSync to:",
+      "description": [
+        "Securely store your medical and health-related information.",
+        "Share your records with authorized healthcare providers for treatment, billing, and care coordination.",
+        "Use your anonymized data for analytics and system improvement purposes"
+      ]
+    },
+    "signature": {
+      "title": "Signature",
+      "description": "Please sign below to confirm your consent."
+    },
+    "buttons": {
+      "email": "Email",
+      "print": "Print",
+      "register": "Register"
+    }
+  },
+  "recordDetailForm": {
+    "title": "Health Record",
+    "fields": {
+      "documentName": {
+        "label": "Document Name",
+        "placeholder": "ABC",
+        "type": "text"
+      },
+      "documentStatus": {
+        "label": "Document Status",
+        "placeholder": "Status",
+        "type": "select"
+      },
+      "visibility": {
+        "label": "Visibility",
+        "placeholder": "Visibility",
+        "type": "select"
+      },
+      "documentType": {
+        "label": "Document Type*",
+        "placeholder": "Blood Report",
+        "type": "text"
+      },
+      "documentDate": {
+        "label": "Document Date",
+        "placeholder": "YYYY/MM/DD"
+      },
+      "doctorName": {
+        "label": "Doctor Name",
+        "placeholder": "Dr. Asitha",
+        "type": "text"
+      },
+      "documentExpireDate": {
+        "label": "Document Expire Date",
+        "placeholder": "YYYY/MM/DD"
+      },
+      "hospital": {
+        "label": "Hospital/Clinic",
+        "placeholder": "Clinic",
+        "type": "text"
+      },
+      "notes": {
+        "label": "Notes/Comments",
+        "placeholder": "Blood Report",
+        "type": "textarea"
+      },
+      "reminderDate": {
+        "label": "Reminder Date",
+        "placeholder": "YYYY/MM/DD"
+      },
+      "reminderTime": {
+        "label": "Time",
+        "placeholder": "HH:MM",
+        "type": "time"
+      },
+      "reference": {
+        "label": "Reference",
+        "placeholder": "Reference",
+        "type": "text"
+      }
+    }
+  }
 }

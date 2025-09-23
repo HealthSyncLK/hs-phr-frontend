@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "@repo/ui/components/form/Input";
 import { InputMask } from "@react-input/mask";
+import { Input } from "@repo/ui/components/form/Input";
 import { DatePicker } from "@repo/ui/components/form/DatePicker";
 import { Icon } from "../general/Icon";
 
@@ -9,6 +9,7 @@ interface DatePickerInputProps {
   onChange?: (value: string) => void;
   hasError?: boolean;
   id?: string;
+  hj: string
 }
 
 export const DatePickerInput: React.FC<DatePickerInputProps> = ({

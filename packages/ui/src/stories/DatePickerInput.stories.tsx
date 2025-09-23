@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import { DatePickerInput } from "../components/form/DatePickerInput";
+
+const meta: Meta<typeof DatePickerInput> = {
+  title: "Form Controls/DateOfBirthInput",
+  component: DatePickerInput,
+  tags: ["autodocs"],
+};
+
+export default meta;
+type Story = StoryObj<typeof DatePickerInput>;
+
+export const Default: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+
+    return (
+      <div className="w-80">
+        <DatePickerInput id="date" value={value} onChange={setValue} />
+        <p className="mt-2 text-sm text-gray-600">
+          Current value: <span className="font-mono">{value}</span>
+        </p>
+      </div>
+    );
+  },
+};
+
+export const WithError: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+
+    return (
+      <div className="w-80">
+        <DatePickerInput
+          id="date-error"
+          value={value}
+          onChange={setValue}
+          hasError
+        />
+        <p className="mt-2 text-sm text-red-600">Invalid date format</p>
+      </div>
+    );
+  },
+};
+
+export const Prefilled: Story = {
+  render: () => {
+    const [value, setValue] = useState("1992/03/12");
+
+    return (
+      <div className="w-80">
+        <DatePickerInput
+          id="date-prefilled"
+          value={value}
+          onChange={setValue}
+        />
+        <p className="mt-2 text-sm text-gray-600">
+          Selected date: <span className="font-mono">{value}</span>
+        </p>
+      </div>
+    );
+  },
+};

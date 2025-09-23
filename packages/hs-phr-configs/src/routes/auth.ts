@@ -70,4 +70,37 @@ router.get('/me', (req, res) => {
     return res.status(401).json({ message: 'Not authenticated' });
 });
 
+
+// SignUP Step 2: Verify OTP 
+router.post('/verify-otp', (req, res) => {
+  const { otp, session_id } = req.body;
+  console.log(`[Mock API] OTP verification for session ${session_id}`);
+
+  if (otp === '123456' && session_id) {
+    return res.status(200).json({
+      success: true,
+      session_id: uuidv4(),
+      verified: true,
+      message: 'OTP verified successfully',
+    });
+  } else {
+    return res.status(400).json({ success: false, message: 'Invalid OTP' });
+  }
+});
+
+// SignUP Step 3: Complete signup request
+router.post('/complete-signup', (req, res) => {
+    const { session_id, contact_type  } = req.body;
+    const { username, password  } = req.body.user_data;
+    const { firstName, lastName, dob, nic, gender  } = req.body.user_data.profile;
+
+    console.log(`[Mock API] : Sign up attempt for username: ${username}`);
+
+    res.status(200).json({
+        success: true,
+        session_id: uuidv4(),
+        message: "Registration completed successfully"
+    });
+});
+
 export default router;

@@ -1,5 +1,4 @@
 'use client';
-import { DateOfBirthInput } from '@repo/ui/components/form/DateOfBirthInput';
 import { Input } from '@repo/ui/components/form/Input';
 import {
   Select,
@@ -15,6 +14,7 @@ import { useConfig } from '../../providers/ConfigProvider';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormControl } from '@repo/ui/components/form/FormControl';
 import { PhoneInput } from '@repo/ui/components/form/PhoneInput';
+import { DatePickerInput } from '@repo/ui/components/form/DatePickerInput';
 
 interface SignUpFormScreenProps {
   onNext: (data: any) => void;
@@ -91,11 +91,11 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
             control={control}
             render={({ field }) => (
               <FormControl label={formConfig.fields.dob.label}>
-                <DateOfBirthInput
+                <DatePickerInput
                   value={field.value}
                   onChange={field.onChange}
                   hasError={!!errors.dob}
-                ></DateOfBirthInput>
+                ></DatePickerInput>
                 {errors.dob && (
                   <p className="text-red-500 text-sm mt-1 leading-tight">
                     {errors.dob?.message as string}

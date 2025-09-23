@@ -69,20 +69,6 @@ export const ConsentBox = forwardRef<ConsentBoxRef, ConsentBoxProps>(
             </div>
           </div>
         )}
-
-        {/* Expanded fullscreen mode */}
-        {/* {isExpanded && (
-        <div className="fixed inset-0 z-50 bg-white p-8 overflow-y-auto custom-scroll-bar">
-          <button
-            onClick={() => setIsExpanded(false)}
-            className="absolute top-4 right-4 p-2 rounded hover:bg-neutral-100"
-          >
-            <Icon name="x" className="w-6 h-6 text-text-header" />
-          </button>
-          <h3 className="font-medium text-lg text-text-header mb-4">{title}</h3>
-          <div className="text-sm space-y-2">{content}</div>
-        </div>
-      )} */}
       </>
     );
   }

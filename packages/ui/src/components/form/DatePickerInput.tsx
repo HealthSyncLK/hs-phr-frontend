@@ -4,14 +4,14 @@ import { Input } from "@repo/ui/components/form/Input";
 import { DatePicker } from "@repo/ui/components/form/DatePicker";
 import { Icon } from "../general/Icon";
 
-interface DateOfBirthInputProps {
+interface DatePickerInputProps {
   value?: string;
   onChange?: (value: string) => void;
   hasError?: boolean;
   id?: string;
 }
 
-export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({
+export const DatePickerInput: React.FC<DatePickerInputProps> = ({
   value = "",
   onChange,
   hasError = false,

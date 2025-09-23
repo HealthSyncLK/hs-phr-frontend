@@ -54,7 +54,7 @@ const post = async <T>(endpointKey: string, body: any): Promise<T> => {
 
     if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'An API error occurred.');
+        throw new Error(errorData.error || 'An API error occurred.');
     }
     return response.json();
 };
@@ -79,27 +79,11 @@ const get = async <T>(endpointKey: string): Promise<T> => {
     return response.json();
 };
 
-//  Identification -> NIC FormData uploads
-const postFormData = async <T>(endpointKey: string, formData: FormData): Promise<T> => {
-    const url = getUrl(endpointKey);
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'include', // Sends cookies
-        body: formData, // Don't set Content-Type header - let browser set it with boundary
-    });
-
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'An API error occurred.');
-    }
-    return response.json();
-};
-
 const apiClient = {
     init,
+    getUrl,
     get,
-    post,
-    postFormData
+    post
 };
 
 export default apiClient;

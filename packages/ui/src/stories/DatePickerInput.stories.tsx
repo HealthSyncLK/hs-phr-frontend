@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { DateOfBirthInput } from "../components/form/DateOfBirthInput";
+import { DatePickerInput } from "../components/form/DatePickerInput";
 
-const meta: Meta<typeof DateOfBirthInput> = {
+const meta: Meta<typeof DatePickerInput> = {
   title: "Form Controls/DateOfBirthInput",
-  component: DateOfBirthInput,
+  component: DatePickerInput,
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof DateOfBirthInput>;
+type Story = StoryObj<typeof DatePickerInput>;
 
 export const Default: Story = {
   render: () => {
@@ -17,7 +17,7 @@ export const Default: Story = {
 
     return (
       <div className="w-80">
-        <DateOfBirthInput id="dob" value={value} onChange={setValue} />
+        <DatePickerInput id="date" value={value} onChange={setValue} />
         <p className="mt-2 text-sm text-gray-600">
           Current value: <span className="font-mono">{value}</span>
         </p>
@@ -32,8 +32,8 @@ export const WithError: Story = {
 
     return (
       <div className="w-80">
-        <DateOfBirthInput
-          id="dob-error"
+        <DatePickerInput
+          id="date-error"
           value={value}
           onChange={setValue}
           hasError
@@ -50,8 +50,8 @@ export const Prefilled: Story = {
 
     return (
       <div className="w-80">
-        <DateOfBirthInput
-          id="dob-prefilled"
+        <DatePickerInput
+          id="date-prefilled"
           value={value}
           onChange={setValue}
         />

@@ -45,7 +45,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {leftIcon && <Icon name={leftIcon} className="w-5 h-5 mx-3 text-text-light" />}
         <input
           type={inputType}
-          className={`w-full h-12 bg-transparent text-text-header placeholder:text-text-light focus:outline-none focus:ring-0 disabled:cursor-not-allowed ${leftIcon ? 'pl-0' : 'pl-4'
+          className={`w-full h-12 bg-transparent text-base leading-6 font-light font-[Poppins] text-text-header placeholder:text-text-light focus:outline-none focus:ring-0 disabled:cursor-not-allowed ${leftIcon ? 'pl-0' : 'pl-4'
             } ${rightIcon || isPassword ? 'pr-0' : 'pr-4'}`}
           ref={ref}
           {...props}

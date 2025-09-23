@@ -8,6 +8,7 @@ const cardVariants = cva(
             variant: {
                 default: 'shadow-md', // Default card with a medium shadow
                 outlined: 'border border-neutral-gray-100', // Outlined card with a border
+                plain: ''
             },
         },
         defaultVariants: {

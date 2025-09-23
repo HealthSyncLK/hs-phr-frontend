@@ -14,7 +14,7 @@ const SelectTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <SelectPrimitive.Trigger
         ref={ref}
-        className={`flex h-12 w-full items-center justify-between rounded-lg border border-neutral-gray-100 bg-white px-4 py-3 text-base ring-offset-white placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+        className={`flex h-12 w-full items-center justify-between rounded-lg border border-neutral-gray-100 bg-white px-4 py-3 text-base leading-6 font-light font-[Poppins] ring-offset-white placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
         {...props}
     >
         {children}
@@ -32,7 +32,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Portal>
         <SelectPrimitive.Content
             ref={ref}
-            className={`relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white text-text-header border-neutral-gray-100 shadow-md animate-in fade-in-80 ${className}`}
+            className={`relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white text-base leading-6 font-light font-[Poppins] text-text-header border-neutral-gray-100 shadow-md animate-in fade-in-80 ${className}`}
             position={position}
             {...props}
         >
@@ -54,7 +54,7 @@ const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <SelectPrimitive.Label
         ref={ref}
-        className={`py-1.5 pl-8 pr-2 text-sm font-semibold ${className}`}
+        className={`py-1.5 pl-8 pr-2 text-base leading-6 font-light font-[Poppins] ${className}`}
         {...props}
     />
 ));
@@ -66,7 +66,7 @@ const SelectItem = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <SelectPrimitive.Item
         ref={ref}
-        className={`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${className}`}
+        className={`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-base leading-6 font-light font-[Poppins] outline-none focus:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${className}`}
         {...props}
     >
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">

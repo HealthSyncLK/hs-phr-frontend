@@ -8,6 +8,7 @@ export interface AppConfig {
     ui: {
         signupForm: any;
         loginForm: any;
+        recordDetailForm: any
     };
     validation: any;
 }

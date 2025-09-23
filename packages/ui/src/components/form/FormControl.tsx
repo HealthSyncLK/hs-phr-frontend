@@ -11,7 +11,7 @@ export const FormControl = ({ label, error, children, className }: FormControlPr
     return (
         <div className={`font-[Poppins] flex flex-col gap-2 ${className}`}>
             {label && (
-                <label className="text-base font-normal text-text-header">
+                <label className="text-base font-normal font-[Poppins] text-text-header">
                     {label}
                 </label>
             )}

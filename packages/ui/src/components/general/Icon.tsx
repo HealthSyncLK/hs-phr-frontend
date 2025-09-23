@@ -34,6 +34,10 @@ import { UsersIcon } from '../../icons/UsersIcon';
 import { MessageCircleIcon } from '../../icons/MessageCircleIcon';
 import { ShoppingCartIcon } from '../../icons/ShoppingCartIcon';
 import { DownloadIcon } from '../../icons/DownloadIcon';
+import { QrCodeIcon } from '../../icons/QrCodeIcon';
+import { LinkIcon } from '../../icons/LinkIcon';
+import { ExpandIcon } from '../../icons/ExpandIcon';
+import { CalendarIcon } from '../../icons/CalendarIcon';
 
 
 // Create a map of icon names to their components
@@ -70,7 +74,12 @@ export const iconMap = {
     users: UsersIcon,
     'message-circle': MessageCircleIcon,
     'shopping-cart': ShoppingCartIcon,
-    download: DownloadIcon
+    download: DownloadIcon,
+    'qr-code': QrCodeIcon,
+    link: LinkIcon,
+    expand: ExpandIcon,
+    calendar: CalendarIcon,
+
     // Add other icons to this map
 };
 

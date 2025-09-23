@@ -2,7 +2,6 @@ import React from "react";
 import { DayPicker } from "react-day-picker";
 import { Icon } from "../general/Icon";
 export type DatePickerProps = React.ComponentProps<typeof DayPicker>;
-// import "react-day-picker/style.css";
 
 
 export const DatePicker = ({

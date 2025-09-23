@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from '../components/general/Badge';
-import { Icon } from '../components/general/Icon';
+import { CustomIcon } from '../components/general/CustomIcon';
 
 const meta: Meta<typeof Badge> = {
     title: 'General/Badge',
@@ -35,11 +35,11 @@ export const Count: Story = {
 };
 
 export const OnIcon: Story = {
-    name: 'Positioned on an Icon',
+    name: 'Positioned on an CustomIcon',
     render: () => (
         // STYLE CHANGE: Changed from `div` to `inline-flex` to wrap the container around the icon.
         <div className="relative inline-flex p-2">
-            <Icon name="bell" className="w-8 h-8 text-text-header" />
+            <CustomIcon name="bell" className="w-8 h-8 text-text-header" />
             {/* STYLE CHANGE: Adjusted position for better overlap */}
             <div className="absolute top-0 right-0">
                 <Badge variant="count" count={3} />

@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from '@repo/ui/components/navigation/Tabs
 import { Typography } from '@repo/ui/components/general/Typography';
 import { FormControl } from '@repo/ui/components/form/FormControl';
 import { PhoneInput } from '@repo/ui/components/form/PhoneInput';
-import { Input } from '@repo/ui/components/form/Input';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
 import { Checkbox } from '@repo/ui/components/form/CheckBox';
 import { Button } from '@repo/ui/components/general/Button';
 
@@ -57,14 +57,14 @@ export const LoginScreen = ({ loginMethod, setLoginMethod }: LoginScreenProps) =
                 ) : (
                     <Controller name="email" control={control} render={({ field }) => (
                         <FormControl label="Email Address">
-                            <Input type="email" placeholder="Enter your email address" hasError={!!errors.email} {...field} />
+                            <CustomInput type="email" placeholder="Enter your email address" hasError={!!errors.email} {...field} />
                         </FormControl>
                     )} />
                 )}
 
                 <Controller name="password" control={control} render={({ field }) => (
                     <FormControl label={formConfig.fields.password.label}>
-                        <Input type="password" placeholder={formConfig.fields.password.placeholder} hasError={!!errors.password} {...field} />
+                        <CustomInput type="password" placeholder={formConfig.fields.password.placeholder} hasError={!!errors.password} {...field} />
                     </FormControl>
                 )} />
             </div>

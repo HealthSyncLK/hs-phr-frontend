@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Icon } from '../components/general/Icon';
-import { iconMap } from '../components/general/Icon'; // Assuming you export iconMap for this story
+import { CustomIcon } from '../components/general/CustomIcon';
+import { iconMap } from '../components/general/CustomIcon'; // Assuming you export iconMap for this story
 
-const meta: Meta<typeof Icon> = {
-    title: 'General/Icon',
-    component: Icon,
+const meta: Meta<typeof CustomIcon> = {
+    title: 'General/CustomIcon',
+    component: CustomIcon,
     tags: ['autodocs'],
     argTypes: {
         name: {
@@ -20,7 +20,7 @@ const meta: Meta<typeof Icon> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Icon>;
+type Story = StoryObj<typeof CustomIcon>;
 
 export const Default: Story = {
     args: {
@@ -42,7 +42,7 @@ export const AllIcons: Story = {
                     key={name}
                     className="text-primary flex flex-col items-center justify-center p-4 border rounded-md w-28 border-neutral-gray-100"
                 >
-                    <Icon name={name as keyof typeof iconMap} className="w-8 h-8 mb-2" />
+                    <CustomIcon name={name as keyof typeof iconMap} className="w-8 h-8 mb-2" />
                     <span className="text-xs">{name}</span>
                 </div>
             ))}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import { Typography } from '../general/Typography';
 import { Button } from '../general/Button';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 export interface FileUploaderProps {
   onFileChange: (file: File | null) => void;
@@ -72,7 +72,7 @@ export const FileUploader = ({ onFileChange, className }: FileUploaderProps) => 
       ) : (
         // Empty State content is updated to match Figma
         <div className="flex flex-col items-center justify-center gap-4 text-center">
-          <Icon name="upload-cloud" className="w-[33px] h-[33px] text-primary" />
+          <CustomIcon name="upload-cloud" className="w-[33px] h-[33px] text-primary" />
           <Typography variant="body2" className="text-text-header">
             Click to upload or drag and drop
           </Typography>

@@ -1,6 +1,6 @@
 import React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

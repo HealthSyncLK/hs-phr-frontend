@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 interface ConsentBoxProps {
   title: string;
@@ -13,10 +13,10 @@ export interface ConsentBoxRef {
 
 export const ConsentBox = forwardRef<ConsentBoxRef, ConsentBoxProps>(
   ({
-      title,
-      content,
-      maxHeight = '200px', // default collapsed height
-    },
+    title,
+    content,
+    maxHeight = '200px', // default collapsed height
+  },
     ref
   ) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -40,7 +40,7 @@ export const ConsentBox = forwardRef<ConsentBoxRef, ConsentBoxProps>(
             <button
               onClick={() => setIsExpanded(true)}
               className="absolute top-2 right-2 p-1 mr-3 rounded hover:bg-neutral-100">
-              <Icon name="expand" className="w-5 h-5 text-text-header"/>
+              <CustomIcon name="expand" className="w-5 h-5 text-text-header" />
             </button>
             <div
               className="font-[Poppins] flex flex-col gap-2.5 bg-white border border-neutral-gray-100 rounded-lg p-6
@@ -60,7 +60,7 @@ export const ConsentBox = forwardRef<ConsentBoxRef, ConsentBoxProps>(
               <button
                 onClick={() => setIsExpanded(false)}
                 className="absolute top-3 right-3 p-2 rounded hover:bg-neutral-100">
-                <Icon name="x" className="w-6 h-6 text-text-header"/>
+                <CustomIcon name="x" className="w-6 h-6 text-text-header" />
               </button>
               <h3 className="font-medium text-lg text-text-header mb-4">
                 {title}

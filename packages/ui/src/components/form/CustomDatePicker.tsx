@@ -1,14 +1,14 @@
 import React from "react";
 import { DayPicker } from "react-day-picker";
-import { Icon } from "../general/Icon";
-export type DatePickerProps = React.ComponentProps<typeof DayPicker>;
+import { CustomIcon } from "../general/CustomIcon";
+export type CustomDatePickerProps = React.ComponentProps<typeof DayPicker>;
 
 
-export const DatePicker = ({
+export const CustomDatePicker = ({
     className,
     showOutsideDays = true,
     ...props
-}: DatePickerProps) => {
+}: CustomDatePickerProps) => {
     return (
         <DayPicker
             showOutsideDays={showOutsideDays}
@@ -44,10 +44,10 @@ export const DatePicker = ({
             components={{
                 Chevron: ({ orientation, ...rest }) =>
                     orientation === "left" ? (
-                        <Icon name="chevron-left" className="h-4 w-4 text-text-header" />
+                        <CustomIcon name="chevron-left" className="h-4 w-4 text-text-header" />
                     ) : (
                         // FIX: Added 'text-text-header' to give the right arrow a visible color.
-                        <Icon name="chevron-right" className="h-4 w-4 text-text-header" />
+                        <CustomIcon name="chevron-right" className="h-4 w-4 text-text-header" />
                     ),
             }}
             {...props}
@@ -55,4 +55,4 @@ export const DatePicker = ({
     );
 };
 
-DatePicker.displayName = "DatePicker";
+CustomDatePicker.displayName = "CustomDatePicker";

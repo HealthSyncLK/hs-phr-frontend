@@ -1,6 +1,6 @@
 'use client';
 import { FileUploader } from '@repo/ui/components/form/FileUploader';
-import { Input } from '@repo/ui/components/form/Input';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
 import { Button } from '@repo/ui/components/general/Button';
 import { Typography } from '@repo/ui/components/general/Typography';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -52,7 +52,7 @@ export const IdentificationScreen = ({
           control={control}
           render={({ field }) => (
             <FormControl label={formConfig.fields.nic.label}>
-              <Input
+              <CustomInput
                 type=""
                 placeholder={formConfig.fields.nic.placeholder}
                 hasError={!!errors.nic}
@@ -95,7 +95,7 @@ export const IdentificationScreen = ({
         <Button
           variant={'primary'}
           className="w-full mt-4"
-          type="submit" 
+          type="submit"
           disabled={!isValid || isSubmitting}
         >
           {formConfig.buttons.next}{' '}

@@ -2,7 +2,7 @@
 "use client";
 
 import { Button } from "@repo/ui/components/general/Button";
-import { Icon } from "@repo/ui/components/general/Icon";
+import { CustomIcon } from "@repo/ui/components/general/CustomIcon";
 import { Typography } from "@repo/ui/components/general/Typography";
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -51,13 +51,13 @@ export default function DocumentPreviewer({ fileUrl }: Props) {
                 </div>
                 <div className="flex items-center justify-center gap-3 flex-shrink-0 mt-1">
                     <Button variant="ghost" size="xs" onClick={goToPrevPage} disabled={pageNumber <= 1}>
-                        <Icon name="chevron-left" className="w-4 h-4" />
+                        <CustomIcon name="chevron-left" className="w-4 h-4" />
                     </Button>
                     <Typography className="text-sm">
                         {pageNumber} / {numPages || '-'}
                     </Typography>
                     <Button variant="ghost" size="xs" onClick={goToNextPage} disabled={pageNumber >= (numPages || 1)}>
-                        <Icon name="chevron-right" className="w-4 h-4" />
+                        <CustomIcon name="chevron-right" className="w-4 h-4" />
                     </Button>
                 </div>
             </div>

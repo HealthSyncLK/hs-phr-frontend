@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { InputMask } from "@react-input/mask";
-import { Input } from "@repo/ui/components/form/Input";
-import { DatePicker } from "@repo/ui/components/form/DatePicker";
-import { Icon } from "../general/Icon";
+import { CustomInput } from "./CustomInput";
+import { CustomDatePicker } from "./CustomDatePicker";
+import { CustomIcon } from "../general/CustomIcon";
 
 interface DatePickerInputProps {
   value?: string;
@@ -54,7 +54,7 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
         onFocus={() => setIsOpen(false)}
         placeholder="YYYY-MM-DD"
         showMask
-        component={Input}
+        component={CustomInput}
         hasError={hasError}
         id={id}
         className={`p-2 border rounded-md w-full focus:outline-none focus:ring-2 ${hasError ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-blue-500'
@@ -67,12 +67,12 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Open date picker"
       >
-        <Icon name="calendar" className="text-text-light" />
+        <CustomIcon name="calendar" className="text-text-light" />
       </button>
 
       {isOpen && (
         <div className="absolute z-50 mt-2 w-full rounded-lg border border-neutral-gray-100 bg-white shadow-lg">
-          <DatePicker onDayClick={handleDateSelect} />
+          <CustomDatePicker onDayClick={handleDateSelect} />
         </div>
       )}
     </div>

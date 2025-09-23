@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Icon, IconName } from '../general/Icon';
+import { CustomIcon, IconName } from '../general/CustomIcon';
 
 // --- Sidebar Container ---
 export const Sidebar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
@@ -56,7 +56,7 @@ export const SidebarItem = React.forwardRef<HTMLAnchorElement, SidebarItemProps>
                 {...props}
             >
                 {isActive && <div className="left-1 h-[40px] w-[6px] rounded-l-xl bg-primary" />}
-                <Icon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
+                <CustomIcon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
                 <span className="flex-grow text-text-header font-normal text-[14px]">{children}</span>
             </a>
         </li>
@@ -87,9 +87,9 @@ export const SidebarCollapse = ({ icon, title, children, isActive }: SidebarColl
                 )}
             >
                 {isActive && <div className="left-1 h-[40px] w-[6px] rounded-l-xl bg-primary" />}
-                <Icon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
+                <CustomIcon name={icon} className="h-5 w-5 flex-shrink-0 text-gray-700" />
                 <span className="font- flex-grow text-left text-text-header font-normal text-[14px]">{title}</span>
-                <Icon name="chevron-down" className={`h-4 w-4 text-text-header transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                <CustomIcon name="chevron-down" className={`h-4 w-4 text-text-header transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
             {/* STYLE CHANGE: Removed padding from the UL. Padding is now handled by each sub-item. */}
             {isOpen && (

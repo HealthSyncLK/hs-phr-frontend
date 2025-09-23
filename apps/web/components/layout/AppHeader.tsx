@@ -12,7 +12,7 @@ import {
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@repo/ui/components/navigation/DropdownMenu';
 import { useAuth } from '../../providers/AuthProvider';
 import { UserProfile } from '@repo/ui/components/composites/UserProfile';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
 
 // A simple helper to generate breadcrumbs from the pathname
 const generateBreadcrumbs = (pathname: string) => {
@@ -62,16 +62,16 @@ export const AppHeader = () => {
                     >
                         <DropdownMenuContent className="w-56">
                             <DropdownMenuItem>
-                                <Icon name="user" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="user" className="w-4 h-4 mr-2" />
                                 <span>My Profile</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Icon name="settings" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="settings" className="w-4 h-4 mr-2" />
                                 <span>Settings</span>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-danger-text focus:text-white focus:bg-danger">
-                                <Icon name="log-out" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="log-out" className="w-4 h-4 mr-2" />
                                 <span>Log out</span>
                             </DropdownMenuItem>
                         </DropdownMenuContent>

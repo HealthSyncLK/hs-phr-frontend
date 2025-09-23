@@ -89,7 +89,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
     name: IconName;
 }
 
-export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
+export const CustomIcon = React.forwardRef<SVGSVGElement, IconProps>(
     ({ name, className, ...props }, ref) => {
         const IconComponent = iconMap[name];
 
@@ -113,4 +113,4 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 );
 
-Icon.displayName = 'Icon';
+CustomIcon.displayName = 'CustomIcon';

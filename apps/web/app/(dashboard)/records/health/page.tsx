@@ -12,7 +12,7 @@ import { RecordDetailView } from '../../../../components/records/RecordDetailVie
 import { RecordsToolbar } from '../../../../components/records/RecordsToolbar';
 import { Card } from '@repo/ui/components/app/Card';
 import { Button } from '@repo/ui/components/general/Button';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
 
 type ViewMode = 'timeline' | 'list';
 
@@ -45,7 +45,7 @@ export default function HealthRecordsPage() {
         <div className="h-full flex flex-col">
             <div className='flex justify-end mb-5'>
                 <Button variant="primary" className="w-full sm:w-auto">
-                    <Icon name="plus" className="w-5 h-5 mr-2" />
+                    <CustomIcon name="plus" className="w-5 h-5 mr-2" />
                     Add Document
                 </Button>
             </div>

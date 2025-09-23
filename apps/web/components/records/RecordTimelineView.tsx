@@ -11,7 +11,7 @@ import {
 } from '@repo/ui/components/data/Timeline';
 import { twMerge } from 'tailwind-merge';
 import { HealthRecord } from '../../app/types/record';
-import { Icon, IconName } from '@repo/ui/components/general/Icon';
+import { CustomIcon, IconName } from '@repo/ui/components/general/CustomIcon';
 import { Typography } from '@repo/ui/components/general/Typography';
 
 // --- Helper component for the card UI ---
@@ -41,7 +41,7 @@ const ReportCard = ({
                     report.iconBgClass
                 )}
             >
-                <Icon name={report.iconName as IconName} className={twMerge('w-6 h-6', report.iconColorClass)} />
+                <CustomIcon name={report.iconName as IconName} className={twMerge('w-6 h-6', report.iconColorClass)} />
             </div>
             <div className="flex-grow">
                 <Typography variant="body1" className="font-medium text-text-header">
@@ -52,20 +52,20 @@ const ReportCard = ({
                 </Typography>
             </div>
             <button>
-                <Icon name="heart" className="w-6 h-6 text-text-light" />
+                <CustomIcon name="heart" className="w-6 h-6 text-text-light" />
             </button>
         </div>
         {/* Card Footer */}
         <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-b-xl">
             <div className="flex items-center gap-2">
-                <Icon name="user" className="w-5 h-5 text-text-light" />
+                <CustomIcon name="user" className="w-5 h-5 text-text-light" />
                 <Typography variant="body2" className="text-text-header">
                     {report.doctor}
                 </Typography>
             </div>
             <a href="#" className="inline-flex items-center text-sm font-medium text-primary">
                 View Report
-                <Icon name="chevron-right" className="w-4 h-4" />
+                <CustomIcon name="chevron-right" className="w-4 h-4" />
             </a>
         </div>
     </div>

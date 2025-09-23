@@ -8,7 +8,7 @@ import {
     DrawerFooter,
 } from '../components/app/Drawer';
 import { Button } from '../components/general/Button';
-import { Input } from '../components/form/Input';
+import { CustomInput } from '../components/form/CustomInput';
 import { FormControl } from '../components/form/FormControl';
 
 const meta: Meta<typeof Drawer> = {
@@ -32,13 +32,13 @@ const InteractiveDrawer = () => {
                     <DrawerBody>
                         <div className="flex flex-col gap-6">
                             <FormControl label="Item Name">
-                                <Input placeholder="Enter item name..." />
+                                <CustomInput placeholder="Enter item name..." />
                             </FormControl>
                             <FormControl label="Description">
-                                <Input placeholder="Enter a brief description..." />
+                                <CustomInput placeholder="Enter a brief description..." />
                             </FormControl>
                             <FormControl label="Category">
-                                <Input placeholder="Select a category..." />
+                                <CustomInput placeholder="Select a category..." />
                             </FormControl>
                         </div>
                     </DrawerBody>

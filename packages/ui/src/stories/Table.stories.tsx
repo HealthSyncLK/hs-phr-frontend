@@ -18,8 +18,8 @@ import {
 } from '../components/navigation/DropdownMenu';
 import { Card } from '../components/app/Card';
 import { Button } from '../components/general/Button';
-import { Input } from '../components/form/Input';
-import { Icon } from '../components/general/Icon';
+import { CustomInput } from '../components/form/CustomInput';
+import { CustomIcon } from '../components/general/CustomIcon';
 import { Typography } from '../components/general/Typography';
 import { Tag } from '../components/general/Tag';
 import { Pagination } from '../components/navigation/Pagination';
@@ -81,11 +81,11 @@ const TableToolbar = () => (
   <Card>
     <div className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex flex-wrap items-center gap-4">
-        <Input placeholder="Select Family Member" className="w-full sm:w-[313px]" rightIcon="chevron-down" />
-        <Input placeholder="Search by immunization" className="w-full sm:w-[313px]" leftIcon="search" />
+        <CustomInput placeholder="Select Family Member" className="w-full sm:w-[313px]" rightIcon="chevron-down" />
+        <CustomInput placeholder="Search by immunization" className="w-full sm:w-[313px]" leftIcon="search" />
       </div>
       <Button variant="secondary">
-        <Icon name="filter" className="w-5 h-5" />
+        <CustomIcon name="filter" className="w-5 h-5" />
       </Button>
     </div>
   </Card>
@@ -112,7 +112,7 @@ const ExpandedContent = () => (
         <TableCell>2025.05.05</TableCell>
         <TableCell className="text-center">
           <Button variant="tertiary" size="sm" className='text-text-header'>
-            <Icon name="more-vertical" className="w-5 h-5" />
+            <CustomIcon name="more-vertical" className="w-5 h-5" />
           </Button>
         </TableCell>
       </TableRow>
@@ -122,7 +122,7 @@ const ExpandedContent = () => (
         <TableCell>2025.05.05</TableCell>
         <TableCell className="text-center">
           <Button variant="tertiary" size="sm" className='text-text-header'>
-            <Icon name="more-vertical" className="w-5 h-5" />
+            <CustomIcon name="more-vertical" className="w-5 h-5" />
           </Button>
         </TableCell>
       </TableRow>
@@ -165,7 +165,7 @@ export const FullExample: Story = {
               <TableCell>2025.05.05</TableCell>
               <TableCell className="text-center">
                 <Button variant="tertiary" size="sm" className='text-text-header'>
-                  <Icon name="more-vertical" className="w-5 h-5" />
+                  <CustomIcon name="more-vertical" className="w-5 h-5" />
                 </Button>
               </TableCell>
               <TableExpandableContent>
@@ -178,7 +178,7 @@ export const FullExample: Story = {
               <TableCell>2025.07.12</TableCell>
               <TableCell className="text-center">
                 <Button variant="tertiary" size="sm" className='text-text-header'>
-                  <Icon name="more-vertical" className="w-5 h-5" />
+                  <CustomIcon name="more-vertical" className="w-5 h-5" />
                 </Button>
               </TableCell>
               <TableExpandableContent>
@@ -235,7 +235,7 @@ export const PrimaryTableWithLabels: Story = {
                 <TableCell>{item.endDate}</TableCell>
                 <TableCell className="text-center">
                   <Button variant="tertiary" size="sm" className='text-text-header'>
-                    <Icon name="more-vertical" className="w-5 h-5" />
+                    <CustomIcon name="more-vertical" className="w-5 h-5" />
                   </Button>
                 </TableCell>
               </TableRow>
@@ -333,16 +333,16 @@ export const WithDropdownActions: Story = {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="tertiary" size="sm" className='text-text-header'>
-                      <Icon name="more-vertical" className="w-5 h-5" />
+                      <CustomIcon name="more-vertical" className="w-5 h-5" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-40">
                     <DropdownMenuItem>
-                      <Icon name="edit" className="w-4 h-4 mr-2" />
+                      <CustomIcon name="edit" className="w-4 h-4 mr-2" />
                       <span>Edit</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="text-danger-text focus:bg-danger focus:text-white">
-                      <Icon name="trash" className="w-4 h-4 mr-2" />
+                      <CustomIcon name="trash" className="w-4 h-4 mr-2" />
                       <span>Delete</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>

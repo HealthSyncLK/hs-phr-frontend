@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 // 1. Context to share the onClose function
 interface ModalContextType {
@@ -105,7 +105,7 @@ export const ModalHeader = ({
                 onClick={onClose}
                 className="p-1 rounded-full hover:bg-gray-100"
             >
-                <Icon name="x" className="w-5 h-5 text-text-light" />
+                <CustomIcon name="x" className="w-5 h-5 text-text-light" />
             </button>
         </div>
     );

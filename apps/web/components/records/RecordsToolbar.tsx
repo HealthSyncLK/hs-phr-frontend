@@ -1,10 +1,10 @@
 'use client';
 
 import { Card } from '@repo/ui/components/app/Card';
-import { Input } from '@repo/ui/components/form/Input';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/form/Select';
 import { Button } from '@repo/ui/components/general/Button';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
 import React from 'react';
 
 export const RecordsToolbar = () => {
@@ -26,13 +26,13 @@ export const RecordsToolbar = () => {
 
                 {/* Right side: Search and Filter */}
                 <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-4">
-                    <Input
+                    <CustomInput
                         placeholder="Search by Document Name or Doctor"
                         leftIcon="search"
                         className="w-full sm:w-[384px]"
                     />
                     <Button variant="secondary" className="w-full sm:w-auto">
-                        <Icon name="filter" className="w-5 h-5" />
+                        <CustomIcon name="filter" className="w-5 h-5" />
                     </Button>
                 </div>
             </div>

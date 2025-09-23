@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
 
     const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/signup');
 
-    if (false && isAuthPage) {
+    if (isAuthPage) {
         if (token) {
             // If the cookie exists, assume the user is logged in. Redirect them.
             return NextResponse.redirect(new URL('/dashboard', request.url));
@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    if (false && !token) {
+    if (!token) {
         // If there's no token, they must log in.
         return NextResponse.redirect(new URL('/login', request.url));
     }

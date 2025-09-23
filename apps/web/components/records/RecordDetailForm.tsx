@@ -6,10 +6,10 @@ import { useConfig } from '../../providers/ConfigProvider';
 import { HealthRecord } from '../../app/types/record';
 import { Typography } from '@repo/ui/components/general/Typography';
 import { FormControl } from '@repo/ui/components/form/FormControl';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/form/Select';
-import { Input } from '@repo/ui/components/form/Input';
-import { DatePicker } from '@repo/ui/components/form/DatePicker';
+import { CustomInput } from '@repo/ui/components/form/CustomInput';
+import { CustomDatePicker } from '@repo/ui/components/form/CustomDatePicker';
 import { DatePickerInput } from '@repo/ui/components/form/DatePickerInput';
 import { Textarea } from '@repo/ui/components/form/Textarea';
 import { Button } from '@repo/ui/components/general/Button';
@@ -54,14 +54,14 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
                     <FormControl label="Attached File">
                         <div className="relative w-[217px] h-[130px] border border-neutral-gray-100 rounded-lg flex items-center justify-center bg-gray-50 bg-cover bg-center" style={{ backgroundImage: "url(/path/to/your/preview.png)" }}>
                             <button type="button" className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:bg-neutral-100">
-                                <Icon name="x" className="w-4 h-4" />
+                                <CustomIcon name="x" className="w-4 h-4" />
                             </button>
                         </div>
                     </FormControl>
 
                     {/* Full-width fields */}
                     <FormControl label={fields.documentName.label}>
-                        <Controller name="documentName" control={methods.control} render={({ field }) => <Input {...field} placeholder={fields.documentName.placeholder} />} />
+                        <Controller name="documentName" control={methods.control} render={({ field }) => <CustomInput {...field} placeholder={fields.documentName.placeholder} />} />
                     </FormControl>
 
                     {/* Two-column grid for half-width fields */}
@@ -75,7 +75,7 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
                         </FormControl>
 
                         <FormControl label={fields.documentType.label}>
-                            <Controller name="documentType" control={methods.control} render={({ field }) => <Input {...field} placeholder={fields.documentType.placeholder} />} />
+                            <Controller name="documentType" control={methods.control} render={({ field }) => <CustomInput {...field} placeholder={fields.documentType.placeholder} />} />
                         </FormControl>
 
                         <FormControl label={fields.documentDate.label}>
@@ -83,7 +83,7 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
                         </FormControl>
 
                         <FormControl label={fields.doctorName.label}>
-                            <Controller name="doctorName" control={methods.control} render={({ field }) => <Input {...field} placeholder={fields.doctorName.placeholder} />} />
+                            <Controller name="doctorName" control={methods.control} render={({ field }) => <CustomInput {...field} placeholder={fields.doctorName.placeholder} />} />
                         </FormControl>
 
                         <FormControl label={fields.documentExpireDate.label}>
@@ -93,7 +93,7 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
 
                     {/* More full-width fields */}
                     <FormControl label={fields.hospital.label}>
-                        <Controller name="hospital" control={methods.control} render={({ field }) => <Input {...field} placeholder={fields.hospital.placeholder} />} />
+                        <Controller name="hospital" control={methods.control} render={({ field }) => <CustomInput {...field} placeholder={fields.hospital.placeholder} />} />
                     </FormControl>
 
                     <FormControl label={fields.notes.label}>

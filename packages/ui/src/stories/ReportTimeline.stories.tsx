@@ -9,7 +9,7 @@ import {
   TimelineYear,
 } from '../components/data/Timeline';
 import { Card } from '../components/app/Card';
-import { Icon, IconName } from '../components/general/Icon';
+import { CustomIcon, IconName } from '../components/general/CustomIcon';
 import { Typography } from '../components/general/Typography';
 
 // --- Type definitions for the story's helper components ---
@@ -39,7 +39,7 @@ interface ReportCardProps {
 const ReportCardHeader = ({ title, fileType, iconName, iconBg, iconColor }: ReportCardHeaderProps) => (
   <div className="flex items-center gap-4 p-4 border-b border-neutral-100">
     <div className={`flex items-center justify-center w-11 h-11 ${iconBg} rounded-lg`}>
-      <Icon name={iconName} className={`w-6 h-6 ${iconColor}`} />
+      <CustomIcon name={iconName} className={`w-6 h-6 ${iconColor}`} />
     </div>
     <div className="flex-grow">
       <Typography variant="body1" className="font-medium text-text-header">
@@ -50,7 +50,7 @@ const ReportCardHeader = ({ title, fileType, iconName, iconBg, iconColor }: Repo
       </Typography>
     </div>
     <button>
-      <Icon name="heart" className="w-6 h-6 text-text-light" />
+      <CustomIcon name="heart" className="w-6 h-6 text-text-light" />
     </button>
   </div>
 );
@@ -58,14 +58,14 @@ const ReportCardHeader = ({ title, fileType, iconName, iconBg, iconColor }: Repo
 const ReportCardFooter = ({ doctorName }: ReportCardFooterProps) => (
   <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-b-xl">
     <div className="flex items-center gap-2">
-      <Icon name="user" className="w-5 h-5 text-text-light" />
+      <CustomIcon name="user" className="w-5 h-5 text-text-light" />
       <Typography variant="body2" className="text-text-header">
         {doctorName}
       </Typography>
     </div>
     <a href="#" className="inline-flex items-center text-sm font-medium text-primary">
       View Report
-      <Icon name="chevron-right" className="w-4 h-4" />
+      <CustomIcon name="chevron-right" className="w-4 h-4" />
     </a>
   </div>
 );

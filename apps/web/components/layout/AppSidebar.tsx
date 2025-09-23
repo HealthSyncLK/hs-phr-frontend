@@ -11,7 +11,7 @@ import {
     SidebarSubItem,
 } from '@repo/ui/components/navigation/Sidebar';
 import { Logo } from '@repo/ui/components/general/Logo';
-import { IconName } from '@repo/ui/components/general/Icon';
+import { IconName } from '@repo/ui/components/general/CustomIcon';
 
 // --- 2. DEFINE THE TYPE FOR A NAVIGATION ITEM ---
 interface NavItem {

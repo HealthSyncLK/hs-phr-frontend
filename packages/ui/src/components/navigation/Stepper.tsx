@@ -1,6 +1,6 @@
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 import { Typography } from '../general/Typography';
 
 // --- Step Component ---
@@ -31,7 +31,7 @@ export const Step = ({ state, stepNumber, title, isLastStep }: StepProps) => {
         <div className="flex flex-1 items-center">
             <div className="flex flex-col items-center gap-1 text-center w-24">
                 <div className={stepVariants({ state })}>
-                    {isCompleted ? <Icon name="check" className="h-5 w-5" /> : stepNumber}
+                    {isCompleted ? <CustomIcon name="check" className="h-5 w-5" /> : stepNumber}
                 </div>
                 <Typography variant="body2">
                     {title}

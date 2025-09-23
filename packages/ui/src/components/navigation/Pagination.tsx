@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { Button } from '../general/Button';
-import { Icon } from '../general/Icon';
+import { CustomIcon } from '../general/CustomIcon';
 
 const DOTS = '...';
 
@@ -121,7 +121,7 @@ export const Pagination = ({
                         disabled={currentPage === 1}
                         className="rounded-r-none"
                     >
-                        <Icon name="chevron-left" className="w-4 h-4" />
+                        <CustomIcon name="chevron-left" className="w-4 h-4" />
                     </Button>
                 </li>
                 {paginationRange.map((pageNumber, index) => {
@@ -149,7 +149,7 @@ export const Pagination = ({
                         disabled={currentPage === lastPage}
                         className="rounded-l-none"
                     >
-                        <Icon name="chevron-right" className="w-4 h-4" />
+                        <CustomIcon name="chevron-right" className="w-4 h-4" />
                     </Button>
                 </li>
             </ul>

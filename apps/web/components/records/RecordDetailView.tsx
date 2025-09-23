@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@repo/ui/components/general/Button';
-import { Icon } from '@repo/ui/components/general/Icon';
+import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
 import { Typography } from '@repo/ui/components/general/Typography';
 import React, { useState } from 'react';
 import { HealthRecord } from '../../app/types/record';
@@ -44,7 +44,7 @@ export const RecordDetailView = ({ record }: RecordDetailViewProps) => {
                 </Tabs>
                 <Button variant="tertiary" size="sm" className="gap-2.5">
                     <span>Full Screen</span>
-                    <Icon name="expand" className="w-[11px] h-[11px]" />
+                    <CustomIcon name="expand" className="w-[11px] h-[11px]" />
                 </Button>
             </div>
 
@@ -55,19 +55,19 @@ export const RecordDetailView = ({ record }: RecordDetailViewProps) => {
                         <DocumentPreviewer fileUrl="/example.pdf" />
                         <div className="flex-shrink-0 flex items-center justify-center gap-3 mt-3">
                             <Button variant="ghost" size="xs">
-                                <Icon name="qr-code" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="qr-code" className="w-4 h-4 mr-2" />
                                 <Typography variant="body2" className='text-text-header'>QR</Typography>
                             </Button>
                             <Button variant="ghost" size="xs" >
-                                <Icon name="print" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="print" className="w-4 h-4 mr-2" />
                                 <Typography variant="body2" className='text-text-header'>Print</Typography>
                             </Button>
                             <Button variant="ghost" size="xs" >
-                                <Icon name="link" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="link" className="w-4 h-4 mr-2" />
                                 <Typography variant="body2" className='text-text-header'>Link</Typography>
                             </Button>
                             <Button variant="ghost" size="xs" >
-                                <Icon name="download" className="w-4 h-4 mr-2" />
+                                <CustomIcon name="download" className="w-4 h-4 mr-2" />
                                 <Typography variant="body2" className='text-text-header'>Download</Typography>
                             </Button>
                         </div>

@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
 } from '../components/navigation/DropdownMenu';
 import { Button } from '../components/general/Button';
-import { Icon } from '../components/general/Icon';
+import { CustomIcon } from '../components/general/CustomIcon';
 
 const meta: Meta<typeof DropdownMenu> = {
     title: 'Navigation/DropdownMenu',
@@ -49,16 +49,16 @@ export const WithIcons: Story = {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="tertiary" size="sm" className='text-text-header'>
-                    <Icon name="more-vertical" className="w-5 h-5" />
+                    <CustomIcon name="more-vertical" className="w-5 h-5" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-40">
                 <DropdownMenuItem>
-                    <Icon name="edit" className="w-4 h-4 mr-2" />
+                    <CustomIcon name="edit" className="w-4 h-4 mr-2" />
                     <span>Edit</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-danger-text focus:bg-danger focus:text-white">
-                    <Icon name="trash" className="w-4 h-4 mr-2" />
+                    <CustomIcon name="trash" className="w-4 h-4 mr-2" />
                     <span>Delete</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>

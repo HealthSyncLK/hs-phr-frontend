@@ -38,7 +38,7 @@
   },
   "otpForm": {
     "title": "OTP Verification",
-    "description": "Please enter the 6 digit code sent to your SMS at ",
+    "description": "Please enter the 6 digit code sent to your",
     "labels": {
       "codeReceive": "Didn't receive a code?",
       "resend": "Resend Code"

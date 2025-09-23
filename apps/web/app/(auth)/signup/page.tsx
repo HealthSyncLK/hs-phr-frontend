@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +19,11 @@ import { SignUpFormScreen } from '../../../components/auth/SignupFormScreen';
 import { IdentificationScreen } from '../../../components/auth/IdentificationScreen';
 import { ConsentScreen } from '../../../components/auth/ConsentScreen';
 import { authService } from '../../services/authService';
+import { docService } from '../../services/docService';
 import { SignupRequest } from '../../types/signupRequest';
+import { useAuthImage } from '../../../providers/AuthImageProvider';
+import { AUTH_IMAGES } from '../../../lib/authImageConfig';
+import { useReactToPrint } from 'react-to-print';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -36,6 +40,16 @@ export default function SignupPage() {
 
   // State to store the session ID and contact info for the OTP step
   const [signupDetails, setSignupDetails] = useState({contact: '', session_id: ''});
+
+  const consentRef = useRef<HTMLDivElement>(null);
+
+  const { setCurrentImage } = useAuthImage(); 
+  // update decorative image when step changes
+  useEffect(() => {
+    const stepKey = currentStep as keyof typeof AUTH_IMAGES.signup;
+    const imageConfig = AUTH_IMAGES.signup[stepKey] || AUTH_IMAGES.default;
+    setCurrentImage(imageConfig.src, imageConfig.cornerSrc);
+  }, [currentStep, setCurrentImage]);
 
   // This useEffect handles redirecting users who are already logged in
   useEffect(() => {
@@ -75,10 +89,10 @@ export default function SignupPage() {
 
   const handleInitialSignup = async (data: any) => {
     try {
-      console.log('OTP handleInitialSignup:', data);
       const response = await authService.verifyContact({
-        contact: signupMethod === 'mobile' ? data.phone : data.email,
-        type: signupMethod === 'mobile' ? 'mobile' : 'email',
+        // TODO - Country code handling
+        contact: signupMethod === 'mobile' ? `+94${data.phone}` : data.email,
+        type: signupMethod === 'mobile' ? 'sms' : 'email',
       });
 
       // On success, save the contact info and session_id, then move to the OTP step
@@ -89,13 +103,13 @@ export default function SignupPage() {
 
       setCurrentStep(2); // Move to the OTP step
     } catch (error: any) {
-      // TODO : Displaying API error messages in UI
       methods.setError('root.serverError', {
         type: 'manual',
         message: error.message,
       });
 
-      if (error.error === 'CONTACT_EXISTS') {
+      // TODO - Check with apiClient Changes: throwing error with code property
+      if (error.code === 'CONTACT_EXISTS') {
         // Navigate to login page if contact already exists
         router.push('/login');
       }
@@ -123,14 +137,12 @@ export default function SignupPage() {
    // Handle data collection and move to the next step
   const handleNextStep = (dataFromChild: {}) => {
     setFormData((prev) => ({ ...prev, ...dataFromChild }));
-    console.log(dataFromChild, 'data');
     setCurrentStep(currentStep + 1);
   };
 
    // OTP form submission
   const handleOtpSubmit = async (data: any) => {
     try {
-      console.log('OTP submitted:', data.otp);
       await authService.verifySignupOtp({
         ...data,
         session_id: signupDetails.session_id,
@@ -138,16 +150,13 @@ export default function SignupPage() {
 
       setCurrentStep(3); // Move to the Identification step
     } catch (error: any) {
-      // Handle OTP verification errors
-      otpMethods.setError('otp', {
+      otpMethods.setError('root.serverError', {
         type: 'manual',
-        message: 'Invalid OTP. Please try again.',
+        message: error.message
       });
 
-      // TODO
-      // If the OTP is incorrect, the system shall display an error message such as “Invalid code. Please try again” and clears the code entered.
-      // If the OTP has expired, the system shall display a message such as “Code expired. Please request a new one”
-      // The system shall display a countdown timer (e.g., “OTP expires in 02:00”).
+     // Clear OTP input only, keep errors
+     otpMethods.setValue('otp', '', { shouldValidate: false, shouldDirty: false });
     }
   };
 
@@ -160,7 +169,7 @@ export default function SignupPage() {
     return null;
   }, [config]);
 
-    const personalInfoMethods = useForm({
+  const personalInfoMethods = useForm({
     resolver: personalInfoSchema ? zodResolver(personalInfoSchema) : undefined,
     mode: 'onChange',
     defaultValues: {
@@ -185,7 +194,7 @@ export default function SignupPage() {
     return null;
   }, [config]);
 
-    const identificationMethods = useForm({
+  const identificationMethods = useForm({
     resolver: identificationSchema
       ? zodResolver(identificationSchema)
       : undefined,
@@ -205,8 +214,7 @@ export default function SignupPage() {
     setCurrentStep(5);
   };
 
-    const handleIdentificationSubmit = async (data: any) => {
-    console.log(data, 'Identification data');
+  const handleIdentificationSubmit = async (data: any) => {
     try {
       if (!data.front || !data.back) {
         identificationMethods.setError('root.serverError', {
@@ -216,33 +224,45 @@ export default function SignupPage() {
         return;
       }
 
-      // You'll need to get the actual patientId from your app state/context
-      // For now, using signupDetails.session_id as a temporary identifier
-      const uploadData: any = {
-        patientId: signupDetails.session_id, // Replace with actual patient ID when available
-        frontImage: data.front,
-        backImage: data.back,
-        metadata: {
-          uploadSource: 'web-signup',
-          timestamp: new Date().toISOString(),
-          signupSessionId: signupDetails.session_id,
-          nic: data.nic, // Include NIC number from form
-        },
+      // Base metadata for both uploads
+      const baseMetadata = {
+        uploadSource: 'web-signup',
+        timestamp: new Date().toISOString(),
+        signupSessionId: signupDetails.session_id,
+        nic: data.nic, // Include NIC number from form
       };
-      console.log('NIC uploadData', uploadData);
 
-      const response = await authService.uploadNicDocument(uploadData);
-      console.log('NIC uploaded successfully:', response);
+      // Create FormData for front image
+      const frontFormData = new FormData();
+      frontFormData.append('file', data.front);
+      frontFormData.append('patientId', signupDetails.session_id); // Replace with actual patient ID when available
+      frontFormData.append('documentType', 'identification');
+      frontFormData.append(
+        'metadata',
+        JSON.stringify({
+          ...baseMetadata,
+          side: 'front',
+        })
+      );
 
-      // Store the upload response in form data for later use
-      setFormData((prev) => ({
-        ...prev,
-        ...data,
-        nicDocuments: {
-          front: response.data.front,
-          back: response.data.back,
-        },
-      }));
+      // Create FormData for back image
+      const backFormData = new FormData();
+      backFormData.append('file', data.back);
+      backFormData.append('patientId', signupDetails.session_id); // Replace with actual patient ID when available
+      backFormData.append('documentType', 'identification');
+      backFormData.append(
+        'metadata',
+        JSON.stringify({
+          ...baseMetadata,
+          side: 'back',
+        })
+      );
+
+      // Upload both images concurrently
+      const [frontResponse, backResponse] = await Promise.all([
+        docService.uploadDocument(frontFormData),
+        docService.uploadDocument(backFormData),
+      ]);
 
       // Move to next step (Consent screen)
       setCurrentStep(5);
@@ -251,7 +271,8 @@ export default function SignupPage() {
       identificationMethods.setError('root.serverError', {
         type: 'manual',
         message:
-          error.message || 'Failed to upload NIC documents. Please try again.',
+          error.message ||
+          'Failed to upload NIC documents. Please try again.',
       });
     }
   };
@@ -273,13 +294,36 @@ export default function SignupPage() {
     },
   });
 
+  // Print handler
+  const handlePrint = useReactToPrint({
+    contentRef: consentRef,
+    documentTitle: "Consent Agreement",
+    pageStyle: `
+      @page {
+        margin: 1in;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+        }
+        .print-content ul {
+          list-style-type: disc;
+          margin-left: 20px;
+        }
+        .print-content li {
+          margin-bottom: 8px;
+          line-height: 1.4;
+        }
+      }
+        `,
+  });
+
   const handleFinalSubmit = async (data: any) => {
     try {
       const finalData = { ...formData, ...data };
-      console.log('Final registration data:', finalData);
       const useData: SignupRequest = {
         session_id: signupDetails.session_id,
-        contact_type: signupMethod === 'mobile' ? 'mobile' : 'email',
+        contact_type: signupMethod === 'mobile' ? 'sms' : 'email',
         user_data: {
           username: signupDetails.contact,
           password: finalData.password,
@@ -308,8 +352,12 @@ export default function SignupPage() {
       case 1:
         return (
           <FormProvider {...methods}>
-            <form
-              onSubmit={methods.handleSubmit(handleInitialSignup)}>
+            <form onSubmit={methods.handleSubmit(handleInitialSignup)}>
+              {methods.formState.errors.root?.serverError && (
+                <div className="font-[Poppins] p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                  { methods.formState.errors.root.serverError.message as string }
+                </div>
+              )}
               <SignupScreen
                 signupMethod={signupMethod}
                 setSignupMethod={setSignupMethod}
@@ -320,9 +368,13 @@ export default function SignupPage() {
       case 2:
         return (
           <FormProvider {...otpMethods}>
-            <form
-              onSubmit={otpMethods.handleSubmit(handleOtpSubmit)}>
-              <OtpScreen contact={signupDetails.contact} />
+            <form onSubmit={otpMethods.handleSubmit(handleOtpSubmit)}>
+              {otpMethods.formState.errors.root?.serverError && (
+                <div className="font-[Poppins] p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                  { otpMethods.formState.errors.root.serverError.message as string }
+                </div>
+              )}
+              <OtpScreen contact={signupDetails.contact} onResend={() => handleInitialSignup(methods.getValues())} />
             </form>
           </FormProvider>
         );
@@ -338,8 +390,12 @@ export default function SignupPage() {
       case 4:
         return (
           <FormProvider {...identificationMethods}>
-            <form
-              onSubmit={identificationMethods.handleSubmit(handleIdentificationSubmit)}>
+            <form onSubmit={identificationMethods.handleSubmit(handleIdentificationSubmit)}>
+              {identificationMethods.formState.errors.root?.serverError && (
+                <div className="font-[Poppins] p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                  { identificationMethods.formState.errors.root.serverError.message as string }
+                </div>
+              )}
               <IdentificationScreen
                 onNext={handleNextStep}
                 onSkip={handleSkipIdentification}
@@ -351,9 +407,13 @@ export default function SignupPage() {
       case 5:
         return (
           <FormProvider {...consentMethods}>
-            <form
-              onSubmit={consentMethods.handleSubmit(handleFinalSubmit)}>
-              <ConsentScreen onNext={handleFinalSubmit} />
+            <form onSubmit={consentMethods.handleSubmit(handleFinalSubmit)}>
+               {consentMethods.formState.errors.root?.serverError && (
+                <div className="font-[Poppins] p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                  { consentMethods.formState.errors.root.serverError.message as string }
+                </div>
+              )}
+              <ConsentScreen onNext={handleFinalSubmit} onPrint={handlePrint} ref={consentRef}/>
             </form>
           </FormProvider>
         );

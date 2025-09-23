@@ -2,17 +2,18 @@
 import { Button } from '@repo/ui/components/general/Button';
 import { Typography } from '@repo/ui/components/general/Typography';
 import { SignaturePad } from '@repo/ui/components/form/SignaturePad';
-import { ConsentBox, ConsentBoxRef } from '@repo/ui/components/form/ConsentBox';
+import { ConsentBox } from '@repo/ui/components/form/ConsentBox';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useConfig } from '../../providers/ConfigProvider';
 import { FormControl } from '@repo/ui/components/form/FormControl';
-import { useReactToPrint } from 'react-to-print';
-import { useRef } from 'react';
+import { forwardRef } from 'react';
 interface ConsentScreenProps {
   onNext: (data: any) => void;
+  onPrint: () => void; 
 }
 
-export const ConsentScreen = ({ onNext }: ConsentScreenProps) => {
+export const ConsentScreen = forwardRef<HTMLDivElement, ConsentScreenProps>(
+  ({ onNext, onPrint }, ref) => {
   const { config } = useConfig();
   const {
     control,
@@ -26,31 +27,6 @@ export const ConsentScreen = ({ onNext }: ConsentScreenProps) => {
   if (!formConfig) {
     return <div>Loading form...</div>;
   }
-
-  const printRef = useRef<HTMLDivElement>(null);
-  // Print handler
-  const handlePrint = useReactToPrint({
-    contentRef: printRef,
-    documentTitle: 'Consent Agreement',
-    pageStyle: `
-      @page {
-        margin: 1in;
-      }
-      @media print {
-        body {
-          -webkit-print-color-adjust: exact;
-        }
-        .print-content ul {
-          list-style-type: disc;
-          margin-left: 20px;
-        }
-        .print-content li {
-          margin-bottom: 8px;
-          line-height: 1.4;
-        }
-      }
-        `,
-  });
 
   return (
     <div className="w-95 max-w-md mx-auto mt-5">
@@ -119,7 +95,7 @@ export const ConsentScreen = ({ onNext }: ConsentScreenProps) => {
           </Button>
         </div>
         <div className="flex justify-start ml-2">
-          <Button leftIcon="print" variant={'ghost'} onClick={handlePrint}  disabled={!isValid || isSubmitting} type='button'>
+          <Button leftIcon="print" variant={'ghost'} onClick={onPrint} disabled={!isValid || isSubmitting} type='button'>
             <Typography className="text-sm">
               {formConfig.buttons.print}
             </Typography>
@@ -139,7 +115,7 @@ export const ConsentScreen = ({ onNext }: ConsentScreenProps) => {
       </div>
 
       {/* Hidden print content */}
-      <div ref={printRef} className="hidden print:block">
+      <div ref={ref} className="hidden print:block">
         <div className="p-5">
           <h1 className="text-2xl font-bold mb-6 text-center">
             Consent Agreement
@@ -195,4 +171,4 @@ export const ConsentScreen = ({ onNext }: ConsentScreenProps) => {
       </div>
     </div>
   );
-};
+});

@@ -1,6 +1,8 @@
+'use client';
 import { DecorativeImage } from '@repo/ui/components/app/DecorativeImage';
 import { Logo } from '@repo/ui/components/general/Logo';
 import React from 'react';
+import { useAuthImage } from '../../providers/AuthImageProvider';
 
 // This layout will wrap all pages inside the (auth) route group.
 export default function AuthLayout({
@@ -8,6 +10,9 @@ export default function AuthLayout({
 }: {
     children: React.ReactNode;
 }) {
+    
+    const { currentImage, currentCornerImage } = useAuthImage();
+
     return (
         <main className="flex min-h-screen w-full">
             {/* Left Panel: Decorative Image */}
@@ -18,8 +23,8 @@ export default function AuthLayout({
                         <div className="absolute inset-y-4 left-4 w-1/2 bg-dark-blue rounded-xl"></div>
                         <div className="w-full text-center relative z-20">
                             <DecorativeImage 
-                                src="/assets/family.jpg" 
-                                cornerSrc="/assets/logoCorner.png" 
+                                src={currentImage} 
+                                cornerSrc={currentCornerImage} 
                                 className="mx-auto"/>
                         </div>
                     </div>

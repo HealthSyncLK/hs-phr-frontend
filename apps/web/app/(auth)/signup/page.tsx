@@ -224,7 +224,14 @@ export default function SignupPage() {
         return;
       }
 
-      // Base metadata for both uploads
+      // Create FormData for multiple file upload
+      const formData = new FormData();
+
+      formData.append('files', data.front);
+      formData.append('files', data.back);
+      formData.append('patientId', signupDetails.session_id); // Replace with actual patient ID when available
+      formData.append('documentType', 'identification');
+
       const baseMetadata = {
         uploadSource: 'web-signup',
         timestamp: new Date().toISOString(),
@@ -232,37 +239,9 @@ export default function SignupPage() {
         nic: data.nic, // Include NIC number from form
       };
 
-      // Create FormData for front image
-      const frontFormData = new FormData();
-      frontFormData.append('file', data.front);
-      frontFormData.append('patientId', signupDetails.session_id); // Replace with actual patient ID when available
-      frontFormData.append('documentType', 'identification');
-      frontFormData.append(
-        'metadata',
-        JSON.stringify({
-          ...baseMetadata,
-          side: 'front',
-        })
-      );
+      formData.append('metadata', JSON.stringify(baseMetadata));
 
-      // Create FormData for back image
-      const backFormData = new FormData();
-      backFormData.append('file', data.back);
-      backFormData.append('patientId', signupDetails.session_id); // Replace with actual patient ID when available
-      backFormData.append('documentType', 'identification');
-      backFormData.append(
-        'metadata',
-        JSON.stringify({
-          ...baseMetadata,
-          side: 'back',
-        })
-      );
-
-      // Upload both images concurrently
-      const [frontResponse, backResponse] = await Promise.all([
-        docService.uploadDocument(frontFormData),
-        docService.uploadDocument(backFormData),
-      ]);
+      await docService.uploadDocumentBatch(formData);
 
       // Move to next step (Consent screen)
       setCurrentStep(5);

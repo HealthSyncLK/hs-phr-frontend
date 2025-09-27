@@ -22,6 +22,19 @@ const meta: Meta<typeof DecorativeImage> = {
       control: "text",
       description: "Alt text for corner image",
     },
+    speechBubbleText: {
+      control: "text",
+      description: "Text content for the speech bubble",
+    },
+    showSpeechBubble: {
+      control: "boolean",
+      description: "Whether to display the speech bubble",
+    },
+    speechBubblePosition: {
+      control: "select",
+      options: ["top-right", "top-left", "bottom-right", "bottom-left"],
+      description: "Position of the speech bubble relative to the image",
+    },
     className: {
       control: "text",
       description: "Custom Tailwind classes for responsive sizing",
@@ -51,5 +64,18 @@ export const WithoutCorner: Story = {
     alt: "Family Picture",
     className:
       "w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[450px] xl:h-[450px]",
+  },
+};
+
+// Speech Bubble - Top Right (Default)
+export const WithSpeechBubbleTopRight: Story = {
+  args: {
+    src: "/src/stories/assets/family.jpg",
+    alt: "Family Picture",
+    cornerSrc: "/src/stories/assets/logoCorner.png",
+    cornerAlt: "Logo",
+    showSpeechBubble: true,
+    speechBubbleText: "Hello! We're having a great time planning our future together.",
+    speechBubblePosition: "top-right",
   },
 };

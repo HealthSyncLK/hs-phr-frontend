@@ -24,6 +24,9 @@ import { SignupRequest } from '../../types/signupRequest';
 import { useAuthImage } from '../../../providers/AuthImageProvider';
 import { AUTH_IMAGES } from '../../../lib/authImageConfig';
 import { useReactToPrint } from 'react-to-print';
+import LoadingOverlay from '../../../components/common/LoadingOverlay';
+import { ConsentPDFDocument } from '../../../components/auth/ConsentPdfDocument';
+import { pdf } from '@react-pdf/renderer';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -41,15 +44,19 @@ export default function SignupPage() {
   // State to store the session ID and contact info for the OTP step
   const [signupDetails, setSignupDetails] = useState({contact: '', session_id: ''});
 
+  // State to manage the loading status for API calls
+  const [isLoading, setIsLoading] = useState(false);
+
   const consentRef = useRef<HTMLDivElement>(null);
 
-  const { setCurrentImage } = useAuthImage(); 
+  const { setCurrentImage, setCurrentSpeechBubbleText } = useAuthImage(); 
   // update decorative image when step changes
   useEffect(() => {
     const stepKey = currentStep as keyof typeof AUTH_IMAGES.signup;
     const imageConfig = AUTH_IMAGES.signup[stepKey] || AUTH_IMAGES.default;
     setCurrentImage(imageConfig.src, imageConfig.cornerSrc);
-  }, [currentStep, setCurrentImage]);
+    setCurrentSpeechBubbleText(imageConfig.text);
+  }, [currentStep, setCurrentImage, setCurrentSpeechBubbleText]);
 
   // This useEffect handles redirecting users who are already logged in
   useEffect(() => {
@@ -88,6 +95,7 @@ export default function SignupPage() {
   }, [signupMethod, methods]);
 
   const handleInitialSignup = async (data: any) => {
+    setIsLoading(true);
     try {
       const response = await authService.verifyContact({
         // TODO - Country code handling
@@ -113,6 +121,8 @@ export default function SignupPage() {
         // Navigate to login page if contact already exists
         router.push('/login');
       }
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -142,6 +152,7 @@ export default function SignupPage() {
 
    // OTP form submission
   const handleOtpSubmit = async (data: any) => {
+    setIsLoading(true);
     try {
       await authService.verifySignupOtp({
         ...data,
@@ -157,6 +168,8 @@ export default function SignupPage() {
 
      // Clear OTP input only, keep errors
      otpMethods.setValue('otp', '', { shouldValidate: false, shouldDirty: false });
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -215,6 +228,7 @@ export default function SignupPage() {
   };
 
   const handleIdentificationSubmit = async (data: any) => {
+    setIsLoading(true);
     try {
       if (!data.front || !data.back) {
         identificationMethods.setError('root.serverError', {
@@ -253,6 +267,8 @@ export default function SignupPage() {
           error.message ||
           'Failed to upload NIC documents. Please try again.',
       });
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -297,9 +313,32 @@ export default function SignupPage() {
         `,
   });
 
+  const generateConsentPDF = async (signatureValue: string, formConfig: any) => {
+    if (!signatureValue) {
+      throw new Error('Signature is required to generate consent PDF');
+    }
+
+    const pdfDoc = (
+      <ConsentPDFDocument
+        formConfig={formConfig}
+        signatureValue={signatureValue}
+      />
+    );
+    const blob = await pdf(pdfDoc).toBlob();
+    return blob;
+  };
+
   const handleFinalSubmit = async (data: any) => {
+    setIsLoading(true);
     try {
       const finalData = { ...formData, ...data };
+
+      // Generate consent PDF if signature exists
+      let consentPDF = null;
+      if (finalData.signature) {
+        const consentBlob = await generateConsentPDF(finalData.signature, config?.ui?.consentForm);
+        consentPDF = new File([consentBlob], 'consent-agreement.pdf', {type: 'application/pdf'});
+      }
       const useData: SignupRequest = {
         session_id: signupDetails.session_id,
         contact_type: signupMethod === 'mobile' ? 'sms' : 'email',
@@ -315,13 +354,44 @@ export default function SignupPage() {
           },
         },
       };
-      await authService.signup(useData);
-      router.push('/dashboard');
+
+      const signupResponse = await authService.signup(useData);
+
+      // If signup is successful upload consent PDF
+      if (consentPDF) {
+        try {
+          const formData = new FormData();
+          formData.append('file', consentPDF);
+          formData.append('patientId', signupResponse.user_id);
+          formData.append('documentType', 'other');
+
+          const consentMetadata = {
+            uploadSource: 'web-signup',
+            timestamp: new Date().toISOString(),
+            signupSessionId: signupDetails.session_id,
+            documentName: 'consent-agreement.pdf',
+            hasSignature: !!finalData.signature,
+          };
+
+          formData.append('metadata', JSON.stringify(consentMetadata));
+
+          await docService.uploadDocument(formData);
+
+          router.push('/dashboard');
+        } catch (error: any) {
+          consentMethods.setError('root.serverError', {
+            type: 'manual',
+            message: error.message,
+          });
+        }
+      }
     } catch (error: any) {
       consentMethods.setError('root.serverError', {
         type: 'manual',
         message: error.message,
       });
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -392,7 +462,7 @@ export default function SignupPage() {
                   { consentMethods.formState.errors.root.serverError.message as string }
                 </div>
               )}
-              <ConsentScreen onNext={handleFinalSubmit} onPrint={handlePrint} ref={consentRef}/>
+              <ConsentScreen onPrint={handlePrint} ref={consentRef}/>
             </form>
           </FormProvider>
         );
@@ -405,5 +475,10 @@ export default function SignupPage() {
     return <div>Loading...</div>;
   }
 
-  return <div>{renderStep()}</div>;
+  return (
+    <div>
+      <LoadingOverlay isVisible={isLoading} />
+      {renderStep()}
+    </div>
+  );
 }

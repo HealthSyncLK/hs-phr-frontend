@@ -98,7 +98,7 @@ router.post('/complete-signup', (req, res) => {
 
     res.status(200).json({
         success: true,
-        session_id: uuidv4(),
+        user_id: uuidv4(),
         message: "Registration completed successfully"
     });
 });

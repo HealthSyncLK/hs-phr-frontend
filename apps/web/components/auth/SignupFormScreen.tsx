@@ -94,8 +94,7 @@ export const SignUpFormScreen = ({ onNext }: SignUpFormScreenProps) => {
                 <DatePickerInput
                   value={field.value}
                   onChange={field.onChange}
-                  hasError={!!errors.dob}
-                ></DatePickerInput>
+                  hasError={!!errors.dob} hj={''}></DatePickerInput>
                 {errors.dob && (
                   <p className="text-red-500 text-sm mt-1 leading-tight">
                     {errors.dob?.message as string}

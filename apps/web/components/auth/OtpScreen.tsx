@@ -23,7 +23,8 @@ export const OtpScreen = ({ contact, onResend }: OtpScreenProps) => {
     const { config } = useConfig();
     const formConfig = config?.ui?.otpForm;
 
-    const [timerKey, setTimerKey] = useState(0);
+    const OTP_EXPIRE_TIME = 120; //TOD: take this as configuarable value
+    const [expiryTime, setExpiryTime] = useState(Date.now() + OTP_EXPIRE_TIME * 1000);
     const [isExpired, setIsExpired] = useState(false);
 
     // --- THIS FUNCTION IS NOW FIXED ---
@@ -49,7 +50,7 @@ export const OtpScreen = ({ contact, onResend }: OtpScreenProps) => {
     
     const handleResend = () => {
         onResend();
-        setTimerKey((prev) => prev + 1); // reset timer
+        setExpiryTime(Date.now() + OTP_EXPIRE_TIME * 1000); // reset timer
         setIsExpired(false); // reset expired state
     };
 
@@ -80,11 +81,11 @@ export const OtpScreen = ({ contact, onResend }: OtpScreenProps) => {
                 <Typography variant="body2" className="mt-2 text-sm text-red-700">
                      { !isExpired ? (
                         <div> OTP expires in {' '}
-                        <Countdown date={Date.now() + 120 * 1000} // 2 minutes from now
+                        <Countdown
+                            date={expiryTime}
                             renderer={renderer}
-                            key={timerKey} // changing key resets timer
                             onComplete={() => setIsExpired(true)}
-                         />
+                            />
                         </div>
                      ) : (<span>OTP expired. Please request a new one.</span>)}
                 </Typography>

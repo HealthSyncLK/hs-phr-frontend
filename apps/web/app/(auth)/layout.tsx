@@ -11,21 +11,23 @@ export default function AuthLayout({
     children: React.ReactNode;
 }) {
     
-    const { currentImage, currentCornerImage } = useAuthImage();
+    const { currentImage, currentCornerImage, currentSpeechBubbleText } = useAuthImage();
 
     return (
         <main className="flex min-h-screen w-full">
             {/* Left Panel: Decorative Image */}
             <div className="hidden lg:flex lg:w-1/2 xl:w-2/3 items-center justify-center p-8 bg-neutral-100 relative">
                 {/* Decorative Image: Center in viewport even right panel scrollable*/}
-                <div className="fixed top-0 left-0 lg:w-1/2 xl:w-2/3 h-screen flex items-center justify-center p-8 bg-neutral-100">
+                <div className="fixed top-0 left-0 lg:w-1/2 xl:w-2/3 h-screen flex items-center justify-center p-8">
                     <div className="max-w-md xl:max-w-2xl text-center">
                         <div className="absolute inset-y-4 left-4 w-1/2 bg-dark-blue rounded-xl"></div>
                         <div className="w-full text-center relative z-20">
                             <DecorativeImage 
                                 src={currentImage} 
                                 cornerSrc={currentCornerImage} 
-                                className="mx-auto"/>
+                                className="mx-auto"
+                                showSpeechBubble={true}
+                                speechBubbleText={currentSpeechBubbleText}/>
                         </div>
                     </div>
                 </div>

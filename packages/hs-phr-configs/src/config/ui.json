@@ -135,7 +135,8 @@
         "Securely store your medical and health-related information.",
         "Share your records with authorized healthcare providers for treatment, billing, and care coordination.",
         "Use your anonymized data for analytics and system improvement purposes"
-      ]
+      ],
+      "pdfTitle": "Consent Agreement"
     },
     "signature": {
       "title": "Signature",

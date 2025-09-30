@@ -77,7 +77,7 @@ export const RecordDetailView = ({ record }: RecordDetailViewProps) => {
                     <div className="flex items-center justify-center h-full"><Typography>AI Report Content Goes Here</Typography></div>
                 )}
                 {activeTab === 'detail' && (
-                    <RecordDetailForm record={record} />)}
+                    <RecordDetailForm record={record} isEditMode={true} />)}
             </div>
         </div>
     );

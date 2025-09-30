@@ -46,7 +46,7 @@ export const AppSidebar = () => {
     return (
         <Sidebar className="w-[268px]">
             <SidebarHeader>
-                <Logo />
+                <Logo src='/assets/logo.png' />
             </SidebarHeader>
             <SidebarNav>
                 {navItems.map((item) => {

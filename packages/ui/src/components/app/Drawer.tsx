@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import FocusTrap from 'focus-trap-react';
 import { CustomIcon } from '../general/CustomIcon';
+import { Typography } from '../general/Typography';
 
 // 1. Context to share the onClose function
 interface DrawerContextType {
@@ -70,7 +71,7 @@ export const DrawerContent = ({ children, className }: DrawerContentProps) => {
                 />
                 {/* Drawer Panel with slide animation */}
                 <motion.div
-                    className={`relative flex flex-col h-full ml-auto bg-white shadow-xl ${className} w-full max-w-lg`}
+                    className={`relative flex flex-col h-full ml-auto bg-white shadow-xl ${className} w-full max-w-xl`}
                     initial={{ x: '100%' }}
                     animate={{ x: '0%' }}
                     exit={{ x: '100%' }}
@@ -104,6 +105,21 @@ export const DrawerHeader = ({
             >
                 <CustomIcon name="x" className="w-5 h-5 text-text-light" />
             </button>
+        </div>
+    );
+};
+
+// 4. Drawer Sub-components for structure
+export const DrawerDescription = ({
+    children,
+    className,
+}: {
+    children: React.ReactNode;
+    className?: string;
+}) => {
+    return (
+        <div>
+            <Typography variant="body1_default" className={className}>{children}</Typography>
         </div>
     );
 };

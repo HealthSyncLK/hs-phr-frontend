@@ -13,6 +13,7 @@ export interface AppConfig {
         identificationForm: any;
         consentForm: any;
         recordDetailForm: any
+        addDocumentForm: any
     };
     validation: any;
 }

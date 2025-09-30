@@ -149,6 +149,7 @@
   },
   "recordDetailForm": {
     "title": "Health Record",
+    "description": "Take or upload photos of your health record/document. Add additional information so that it will be easier to search and share",
     "fields": {
       "documentName": {
         "label": "Document Name",
@@ -208,5 +209,9 @@
         "type": "text"
       }
     }
+  },
+  "addDocumentForm": {
+    "title": "Add Documents",
+    "description": "Take or upload photos of your health record/document. Add additional information so that it will be easier to search and share."
   }
 }

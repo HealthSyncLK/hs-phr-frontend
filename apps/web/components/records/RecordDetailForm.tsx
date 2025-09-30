@@ -1,25 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { useConfig } from '../../providers/ConfigProvider';
 import { HealthRecord } from '../../app/types/record';
 import { Typography } from '@repo/ui/components/general/Typography';
 import { FormControl } from '@repo/ui/components/form/FormControl';
-import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
+import { DocumentUpload } from '@repo/ui/components/form/DocumentUpload';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/components/form/Select';
 import { CustomInput } from '@repo/ui/components/form/CustomInput';
-import { CustomDatePicker } from '@repo/ui/components/form/CustomDatePicker';
 import { DatePickerInput } from '@repo/ui/components/form/DatePickerInput';
+import { TimePicker } from '@repo/ui/components/form/TimePicker';
 import { Textarea } from '@repo/ui/components/form/Textarea';
 import { Button } from '@repo/ui/components/general/Button';
 
 
 interface RecordDetailFormProps {
     record: HealthRecord;
+    isEditMode: boolean
 }
 
-export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
+export const RecordDetailForm = ({ record, isEditMode }: RecordDetailFormProps) => {
+    const [files, setFiles] = useState<File[]>([]);
+
     const { config } = useConfig();
     const methods = useForm({
         // Populate the form with the selected record's data for editing
@@ -30,7 +33,13 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
             documentDate: record.date,
             documentExpireDate: record.date,
             hospital: '',
-            notes: ''
+            notes: '',
+            reminderDate: record.date,
+            time: {
+                hour: 9,
+                minute: 30,
+            },
+            reference: ''
         },
     });
 
@@ -45,19 +54,18 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
 
     const { fields } = formConfig;
 
+    console.log(formConfig.description)
+
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)} className="flex flex-col h-full">
                 <div className="flex-grow space-y-5 overflow-y-auto pr-2">
-                    <Typography variant="h3">{formConfig.title}</Typography>
-
-                    <FormControl label="Attached File">
-                        <div className="relative w-[217px] h-[130px] border border-neutral-gray-100 rounded-lg flex items-center justify-center bg-gray-50 bg-cover bg-center" style={{ backgroundImage: "url(/path/to/your/preview.png)" }}>
-                            <button type="button" className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:bg-neutral-100">
-                                <CustomIcon name="x" className="w-4 h-4" />
-                            </button>
-                        </div>
-                    </FormControl>
+                    {!isEditMode && <div>
+                        <Typography variant="body1_default" className='mb-4'>{formConfig.description}</Typography>
+                        <FormControl label="">
+                            <DocumentUpload files={files} onFilesChange={setFiles} />
+                        </FormControl>
+                    </div>}
 
                     {/* Full-width fields */}
                     <FormControl label={fields.documentName.label}>
@@ -99,11 +107,24 @@ export const RecordDetailForm = ({ record }: RecordDetailFormProps) => {
                     <FormControl label={fields.notes.label}>
                         <Controller name="notes" control={methods.control} render={({ field }) => <Textarea {...field} placeholder={fields.notes.placeholder} rows={4} />} />
                     </FormControl>
-                </div>
 
-                <div className="flex-shrink-0 flex items-center gap-6 pt-6 mt-auto border-t border-neutral-100">
-                    <Button type="button" variant="danger" className="w-[148px]">Delete</Button>
-                    <Button type="submit" variant="primary" className="ml-auto w-[340px]">Save Changes</Button>
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-5">
+                        <FormControl label={fields.reminderDate.label}>
+                            <Controller name="reminderDate" control={methods.control} render={({ field: { onChange, value } }) => <DatePickerInput value={value} onChange={onChange} />} />
+                        </FormControl>
+                        <FormControl label={fields.reminderTime.label}>
+                            <Controller name="time" control={methods.control} render={({ field: { onChange, value } }) => <TimePicker value={value} onChange={onChange} />} />
+                        </FormControl>
+                    </div>
+
+                    <FormControl label={fields.reference.label}>
+                        <Controller name="reference" control={methods.control} render={({ field }) => <CustomInput {...field} placeholder={fields.reference.placeholder} />} />
+                    </FormControl>
+
+                    <div className="flex-shrink-0 flex items-center gap-6 pt-6 mt-auto border-t border-neutral-100">
+                        <Button type="button" variant="danger" className="w-[148px]">Delete</Button>
+                        <Button type="submit" variant="primary" className="ml-auto w-[340px]">Save Changes</Button>
+                    </div>
                 </div>
             </form>
         </FormProvider>

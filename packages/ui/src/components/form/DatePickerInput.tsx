@@ -9,7 +9,6 @@ interface DatePickerInputProps {
   onChange?: (value: string) => void;
   hasError?: boolean;
   id?: string;
-  hj: string
 }
 
 export const DatePickerInput: React.FC<DatePickerInputProps> = ({

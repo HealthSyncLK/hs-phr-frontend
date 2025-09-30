@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { HealthRecord } from '../../../types/record';
 import { recordsService } from '../../../services/recordService';
 import { Typography } from '@repo/ui/components/general/Typography';
@@ -13,12 +13,14 @@ import { RecordsToolbar } from '../../../../components/records/RecordsToolbar';
 import { Card } from '@repo/ui/components/app/Card';
 import { Button } from '@repo/ui/components/general/Button';
 import { CustomIcon } from '@repo/ui/components/general/CustomIcon';
+import { AddDocumentDrawer } from '../../../../components/records/AddDocumentDrawer';
 
 type ViewMode = 'timeline' | 'list';
 
 export default function HealthRecordsPage() {
     const [view, setView] = useState<ViewMode>('timeline');
     const [selectedRecord, setSelectedRecord] = useState<HealthRecord | null>(null);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const { data: records, error, isLoading } = useSWR(
         'health-records', // A unique, descriptive key for SWR
@@ -44,7 +46,7 @@ export default function HealthRecordsPage() {
     return (
         <div className="h-full flex flex-col">
             <div className='flex justify-end mb-5'>
-                <Button variant="primary" className="w-full sm:w-auto">
+                <Button variant="primary" className="w-full sm:w-auto" onClick={() => setIsDrawerOpen(true)}>
                     <CustomIcon name="plus" className="w-5 h-5 mr-2" />
                     Add Document
                 </Button>
@@ -72,6 +74,13 @@ export default function HealthRecordsPage() {
                 </Card>
             </div>
 
+            <AddDocumentDrawer
+                isOpen={isDrawerOpen}
+                onClose={() => setIsDrawerOpen(false)}
+                onSuccess={() => {
+                    // mutate(); // Re-fetch the records list after a new one is added
+                }}
+            />
 
         </div>
     );

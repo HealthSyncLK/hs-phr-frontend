@@ -49,7 +49,7 @@
     },
     "dob": {
         "requiredMessage": "Date of birth is required.",
-        "invalidMessage": "Date of birth must be in the past.",
+        "invalidMessage": "Date of birth is invalid",
         "invalidAgeMessage": "You must be at least 18 years old."
     }
    

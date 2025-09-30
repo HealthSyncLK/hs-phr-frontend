@@ -18,7 +18,7 @@ const verifySignupOtp = async (data: { otp: string; session_id: string }): Promi
   return apiClient.post('auth.verify-otp', data);
 };
 
-const signup = async (data: SignupRequest): Promise<{ user: User }> => {
+const signup = async (data: SignupRequest): Promise<{ user_id: string, succes: boolean, message: string }> => {
   return apiClient.post('auth.complete-signup', data);
 };
 

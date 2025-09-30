@@ -8,12 +8,11 @@ import { useConfig } from '../../providers/ConfigProvider';
 import { FormControl } from '@repo/ui/components/form/FormControl';
 import { forwardRef } from 'react';
 interface ConsentScreenProps {
-  onNext: (data: any) => void;
   onPrint: () => void; 
 }
 
 export const ConsentScreen = forwardRef<HTMLDivElement, ConsentScreenProps>(
-  ({ onNext, onPrint }, ref) => {
+  ({ onPrint }, ref) => {
   const { config } = useConfig();
   const {
     control,
@@ -118,7 +117,7 @@ export const ConsentScreen = forwardRef<HTMLDivElement, ConsentScreenProps>(
       <div ref={ref} className="hidden print:block">
         <div className="p-5">
           <h1 className="text-2xl font-bold mb-6 text-center">
-            Consent Agreement
+            {formConfig.consent.pdfTitle}
           </h1>
 
           {/* Full consent content for printing */}

@@ -20,6 +20,11 @@ const uploadDocument = async (formData: FormData): Promise<any> => {
   return upload('documents.upload', formData);
 };
 
+const uploadDocumentBatch = async (formData: FormData): Promise<any> => {
+  return upload('documents.batch-upload', formData);
+};
+
 export const docService = {
-  uploadDocument
+  uploadDocument,
+  uploadDocumentBatch
 };
